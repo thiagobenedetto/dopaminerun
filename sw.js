@@ -1,5 +1,5 @@
 // DopamineRun — service worker: funciona offline e se atualiza sozinho na próxima abertura.
-const VERSION = 'dopaminerun-1.2.0';
+const VERSION = 'dopaminerun-1.3.0';
 const FILES = ['./', './index.html', './manifest.webmanifest', './baloo2.woff2', './supabase.js',
   './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 

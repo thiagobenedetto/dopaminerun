@@ -67,8 +67,8 @@ body.has-timer .wrap{padding-bottom:calc(var(--nav-h) + 110px)}
 .lvl-text b{display:block;font-size:17px;font-weight:700}
 .lvl-text span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .lvl-text b,.lvl-text span{white-space:nowrap}
-@media (max-width:340px){.lvl-text{display:none}}
-@media (max-width:360px){.lvl-text b{display:none}.lvl-text span{font-size:14px;font-weight:700;color:var(--ink)}.wallet b{font-size:18px}.hud{gap:8px}}
+.lvl-text span{display:block;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:360px){.wallet b{font-size:18px}.hud{gap:8px}.lvl{gap:8px}.lvl-text .nick-name{font-size:16px}}
 .wallet{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 7px;box-shadow:var(--shadow)}
 .wallet b{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
 .wallet.pulse{animation:pulse .6s cubic-bezier(.3,1.6,.5,1)}
@@ -254,16 +254,6 @@ dialog::backdrop{background:rgba(8,10,28,.55)}
 #zoom img{width:100%;border-radius:18px;margin-top:12px}
 .center{text-align:center}
 nav button{font-size:12px}nav button .ic-wrap{width:50px}
-.rk-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}
-.rk-card+.rk-card{margin-top:12px}
-.rk-card h3{margin:0 0 2px;font-size:19px;font-weight:800}
-.rk-or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:14px 0 2px}.rk-or::before,.rk-or::after{content:"";flex:1;height:1px;background:var(--line)}
-.rk-head{background:var(--accent);color:#fff;border-radius:24px;padding:16px 16px 14px}
-.rk-head .t{font-size:24px;font-weight:800;line-height:1.1}
-.rk-head .m{font-size:14px;opacity:.9;margin-top:2px}
-.rk-head .row2{display:flex;gap:8px;margin-top:12px}
-.rk-head .btn{background:rgba(255,255,255,.16);color:#fff;min-height:40px;font-size:15px}
-.rk-head .btn.gold{background:var(--gold);color:#3A2600}
 .rk-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px 14px 10px 10px}
 .rk-row.me{border:2px solid var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--surface))}
 .rk-pos{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex:none;background:var(--surface-2);color:var(--muted);font-size:16px}
@@ -274,12 +264,7 @@ nav button{font-size:12px}nav button .ic-wrap{width:50px}
 .rk-name small{display:block;color:var(--muted);font-weight:500;font-size:13px}
 .rk-pts{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;text-align:right;line-height:1}
 .rk-pts small{display:block;font-size:11px;color:var(--muted);font-weight:600}
-.rk-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.rk-chips button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;min-height:38px;padding:4px 14px;font-weight:700;font-size:14px}
-.rk-chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.rk-rules{font-size:14px;color:var(--muted);line-height:1.5;margin:0;padding-left:18px}
 .rk-note{font-size:13px;color:var(--muted);margin:10px 2px 0;display:flex;gap:6px;align-items:center}
-.rk-danger{display:flex;gap:10px;margin-top:18px}.rk-danger .btn{flex:1;min-height:44px;font-size:14px}
 .install{display:flex;gap:10px;align-items:center;background:var(--surface);border:1.5px dashed var(--accent);border-radius:18px;padding:12px 12px 12px 14px;margin-top:10px;font-size:14px}
 .install div{flex:1}.install b{display:block;font-size:15px}
 .upper{text-transform:uppercase;letter-spacing:.12em;font-weight:800}
@@ -287,6 +272,64 @@ nav button{font-size:12px}nav button .ic-wrap{width:50px}
 .backup .row2{display:flex;gap:10px}.backup .row2>*{flex:1}
 .backup label.btn{cursor:pointer}
 .divider{height:1px;background:var(--line);margin:20px 0 4px}
+
+/* v4.2: ajuste do fundo da tela (iOS 26) */
+nav{bottom:calc(-1 * var(--vp-gap,0px))}
+.timerbar{transform:translateY(var(--vp-gap,0px))}
+/* v4.2: HUD com apelido */
+.lvl.me{cursor:pointer;border-radius:16px}
+.lvl-text .nick-name{display:block;font-size:17px;font-weight:800;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.lvl-text{overflow:hidden}
+/* v4.2: Ranking */
+.rk-hero{position:relative;overflow:hidden;background:var(--accent);color:#fff;border-radius:26px;padding:20px 18px 18px;box-shadow:var(--shadow)}
+.rk-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}
+.rk-hero>*{position:relative;z-index:1}
+.rk-hero h2{margin:0;font-size:26px;line-height:1.1;font-weight:800}
+.rk-hero p{margin:6px 0 0;font-size:15px;opacity:.92}
+.rk-hero .trophy{width:56px;height:56px;border-radius:18px;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
+.rk-hero .trophy .ic{width:30px;height:30px;color:var(--gold)}
+.rk-hero .btns{display:grid;gap:10px;margin-top:18px}
+.rk-hero .btn.gold{background:var(--gold);color:#3A2600}
+.rk-hero .btn.glass{background:rgba(255,255,255,.16);color:#fff}
+.rk-meline{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin:12px 4px 0}
+.rk-meline b{color:var(--ink)}
+.linkbtn{background:none;border:0;padding:4px 2px;color:var(--accent-text);font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:3px;min-height:32px}
+.rk-how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.rk-how div{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 8px;text-align:center;font-size:13px;color:var(--muted);line-height:1.25}
+.rk-how b{display:block;font-size:18px;color:var(--ink);font-weight:800;margin:4px 0 2px}
+.rk-how .ic{color:var(--accent-text);margin:0 auto}
+.rk-privacy{font-size:13px;color:var(--muted);margin:10px 4px 0;text-align:center}
+.rk-title{display:flex;align-items:center;gap:10px;margin:18px 0 12px}
+.rk-title div{flex:1;min-width:0}
+.rk-title h2{margin:0;font-size:24px;line-height:1.1;font-weight:800;overflow-wrap:anywhere}
+.rk-title small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.rk-status{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:center}
+.rk-place{font-size:52px;font-weight:800;line-height:.9;font-variant-numeric:tabular-nums}
+.rk-place .num{display:block;letter-spacing:-.02em}
+.rk-place small{display:block;font-size:13px;font-weight:700;opacity:.85;margin-top:4px;letter-spacing:.02em}
+.rk-status .pts{font-size:15px;opacity:.92}
+.rk-status .pts b{font-size:28px;font-weight:800;display:block;line-height:1;opacity:1;font-variant-numeric:tabular-nums}
+.rk-msg{margin-top:14px;background:rgba(255,255,255,.14);border-radius:14px;padding:10px 12px;font-size:15px;font-weight:600;line-height:1.3}
+.rk-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.16);border-radius:999px;padding:3px 10px;font-size:13px;font-weight:700;margin-top:10px}
+.rk-chip .ic{width:15px;height:15px}
+.rk-hero .row2{display:flex;gap:10px;margin-top:14px}
+.rk-hero .row2 .btn.gold{flex:1}
+.rk-hero .row2 .btn.glass{width:48px;padding:0;flex:none}
+.rk-bar{height:6px;border-radius:99px;background:var(--surface-2);margin-top:6px;overflow:hidden}
+.rk-bar i{display:block;height:100%;border-radius:99px;background:var(--accent)}
+.rk-row.me .rk-bar i{background:var(--gold)}
+.rk-manage{display:grid;gap:10px;margin-top:14px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:16px;padding:4px}
+.seg button{border:0;background:none;border-radius:12px;min-height:40px;font-weight:700;font-size:15px;color:var(--muted)}
+.seg button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.rk-consent{display:flex;gap:10px;align-items:flex-start;background:var(--accent-soft);border-radius:16px;padding:12px 14px;font-size:14px;color:var(--ink);line-height:1.35}
+.rk-consent b{display:block;margin-bottom:2px}
+.rk-consent .ic{color:var(--accent-text);margin-top:2px}
+.rk-gap{text-align:center;color:var(--muted);letter-spacing:.2em;font-size:12px;padding:2px 0}
+.vp-diag{font-size:12px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;margin-top:8px;overflow-wrap:anywhere;-webkit-user-select:text;user-select:text}
+.vp-row{display:flex;align-items:center;gap:12px;margin-top:8px}
+.vp-row input[type=range]{flex:1;accent-color:var(--accent)}
+.vp-row output{min-width:44px;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
 
 /* Celebration */
 .party{position:fixed;inset:0;display:none;place-items:center;z-index:20;background:rgba(8,10,28,.62);padding:20px}
@@ -320,6 +363,8 @@ nav button{font-size:12px}nav button .ic-wrap{width:50px}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 19.5c.8-3.4 3.4-5.2 6.5-5.2s5.7 1.8 6.5 5.2"/><path d="M15.5 5.3a3.3 3.3 0 0 1 0 6.4M17.8 14.6c2 .7 3.2 2.3 3.7 4.9"/></symbol>
+<symbol id="i-dots" viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18.5" cy="12" r="1.3"/></symbol>
 <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5v1.5A3.5 3.5 0 0 0 8.5 11M16 6h3v1.5a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13v4M8.5 20h7M10 17h4"/></symbol>
 <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 7.5L12 3.5l4 4"/><path d="M6 11H5v9h14v-9h-1"/></symbol>
 <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/></symbol>
@@ -507,7 +552,10 @@ function renderHud(){
   const bal=h('b',{id:'bal','aria-label':`${fmt(s.coins)} moedas`},fmt(shown===null?s.coins:shown));
   const wallet=h('div',{class:'wallet',id:'wallet'},miniCoin(),bal);
   $('#hud').replaceChildren(
-    h('div',{class:'lvl','aria-label':`Nível ${lv.L}, ${lv.into} de ${lv.need} XP`},ring,h('div',{class:'lvl-text'},h('b',null,`Nível ${lv.L}`),h('span',null,`${lv.into}/${lv.need} XP`))),
+    RK.nickname
+      ?h('button',{class:'lvl me',type:'button',id:'hud-me','aria-label':`${RK.nickname}, nível ${lv.L}, ${lv.into} de ${lv.need} XP. Toque para alterar o apelido`,onclick:openProfile},ring,
+          h('div',{class:'lvl-text'},h('b',{class:'nick-name'},RK.nickname),h('span',null,`Nível ${lv.L} · ${lv.into}/${lv.need} XP`)))
+      :h('div',{class:'lvl','aria-label':`Nível ${lv.L}, ${lv.into} de ${lv.need} XP`},ring,h('div',{class:'lvl-text'},h('b',null,`Nível ${lv.L}`),h('span',null,`${lv.into}/${lv.need} XP`))),
     wallet,h('button',{class:'icon-btn','aria-label':'Ajustes',onclick:openSettings},ic('sliders')));
   const target=s.coins||0;
   if(shown===null||reduceMotion()){shown=target;bal.textContent=fmt(target)}
@@ -719,7 +767,8 @@ function openSettings(){
     h('div',{class:'actions'},h('button',{class:'btn',onclick:()=>{if(goal!==M.state.goal)putState({goal});closeSheet()}},'Salvar ajustes')),
     h('div',{class:'divider'}),
     h('div',{class:'field'},h('label',null,'Backup'),h('span',{class:'sub',style:'margin:0'},'Seus dados ficam só neste iPhone. '+(lastBackup()?`Último backup: ${new Date(lastBackup()).toLocaleDateString('pt-BR',{day:'2-digit',month:'short'})}.`:'Você ainda não fez nenhum backup.')),
-      h('div',{class:'backup'},h('div',{class:'row2'},exp,h('label',{class:'btn ghost',for:'bkin'},'Restaurar'),bkin))));
+      h('div',{class:'backup'},h('div',{class:'row2'},exp,h('label',{class:'btn ghost',for:'bkin'},'Restaurar'),bkin))),
+    vpSettings());
 }
 function confirmBtn(label,armedLabel,onConfirm){let armed=false,tm;const b=h('button',{class:'btn danger',type:'button',onclick:()=>{
   if(armed){clearTimeout(tm);onConfirm();return}
@@ -892,10 +941,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#party').classLis
 const SB_URL='https://ktfqgzihgirtuqbhgjhk.supabase.co';
 const SB_KEY='sb_publishable_aHOXWGIxkOCImoCpmMmxgw_9uuyQp5c'; // chave pública: a proteção fica nas regras do banco
 const RKK='dopaminerun-rank';
-let RK={nickname:'',leagues:[],active:null,cache:{},queue:[]};
+let RK={nickname:'',joined:false,period:'week',cache:{},queue:[]};
 try{RK=Object.assign(RK,JSON.parse(localStorage.getItem(RKK)||'{}'))}catch(e){}
+/* v4.2: as ligas da v4 saíram do app; o ranking agora é público e opcional */
+delete RK.leagues;delete RK.active;if(!['week','month','all'].includes(RK.period))RK.period='week';
+if(!RK.cache||typeof RK.cache!=='object'||Object.keys(RK.cache).some(k=>!['week','month','all'].includes(k)))RK.cache={};
 const saveRK=()=>{try{localStorage.setItem(RKK,JSON.stringify(RK))}catch(e){}};
-let sb=null,rkBusy=false,rkErr='',rkLoadedAt=0,pendingCode='',flushing=false;
+let sb=null,rkBusy=false,rkErr='',rkLoadedAt=0,flushing=false;
 function sbClient(){if(!sb&&window.supabase&&window.supabase.createClient)sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'dopaminerun-auth'}});return sb}
 async function sbAuth(){
   const c=sbClient();if(!c)throw{code:'lib'};
@@ -903,9 +955,8 @@ async function sbAuth(){
   const r=await c.auth.signInAnonymously();if(r.error)throw{code:'auth',message:r.error.message};return c;
 }
 async function rpc(name,args){const c=await sbAuth();const r=await c.rpc(name,args||{});if(r.error)throw{code:String(r.error.message||r.error.code||'erro'),raw:r.error};return r.data}
-const RKMSG={apelido_em_uso:'Esse apelido já está em uso nessa liga. Escolha outro.',apelido_invalido:'O apelido precisa ter de 2 a 20 caracteres.',
-  nome_invalido:'O nome da liga precisa ter de 2 a 30 caracteres.',liga_nao_encontrada:'Não achei nenhuma liga com esse código. Confira as letras.',
-  liga_cheia:'Essa liga já está cheia (50 pessoas).',limite_ligas:'Você já criou 5 ligas, que é o limite.',nao_membro:'Você não faz mais parte dessa liga.'};
+const RKMSG={apelido_em_uso:'Esse apelido já é de outra pessoa no ranking. Escolha outro.',apelido_proibido:'Esse apelido não é permitido. Escolha outro.',apelido_invalido:'Use de 2 a 20 caracteres: letras, números, espaço, ponto, hífen ou sublinhado.',
+  periodo_invalido:'Período inválido.'};
 function rkMsg(e){
   if(!navigator.onLine)return'Sem internet agora. O ranking atualiza quando a conexão voltar.';
   const c=String(e&&e.code||'');for(const k in RKMSG)if(c.includes(k))return RKMSG[k];
@@ -922,34 +973,27 @@ function installBanner(){
     h('button',{class:'edit-link','aria-label':'Dispensar aviso',onclick:()=>{try{localStorage.setItem('dopaminerun-install-hide','1')}catch(e){}b.remove()}},'✕'));
   return b;
 }
-function weekLabel(){const d=new Date();const day=(d.getDay()+6)%7;const a=new Date(d);a.setDate(d.getDate()-day);const b=new Date(a);b.setDate(a.getDate()+6);
-  const f=x=>x.toLocaleDateString('pt-BR',{day:'numeric',month:'short'}).replace('.','');return`Semana de ${f(a)} a ${f(b)} · zera na segunda`}
-async function refreshLeagues(){
-  const ls=await rpc('my_leagues');RK.leagues=(ls||[]).map(l=>({id:l.id,name:l.name,code:l.code,members:l.members,nickname:l.nickname}));
-  if(!RK.leagues.some(l=>l.id===RK.active))RK.active=RK.leagues.length?RK.leagues[0].id:null;
-  if(RK.leagues.length)RK.nickname=(RK.leagues.find(l=>l.id===RK.active)||RK.leagues[0]).nickname;
-  saveRK();
-}
+const PERIODS=[['week','Semana'],['month','Mês'],['all','Geral']];
 async function loadRanking(force){
-  if(!RK.leagues.length||rkBusy)return;if(!force&&Date.now()-rkLoadedAt<15000)return;
-  rkBusy=true;rkErr='';if(tab==='rank')render();
-  try{await flushRank(true);await refreshLeagues();if(RK.active){const rows=await rpc('get_ranking',{p_league:RK.active});RK.cache[RK.active]={rows:rows||[],at:Date.now()};saveRK()}rkLoadedAt=Date.now()}
-  catch(e){rkErr=rkMsg(e);if(String(e&&e.code).includes('nao_membro')){try{await refreshLeagues()}catch(_){}}}
+  if(!RK.joined||rkBusy)return;if(!force&&Date.now()-rkLoadedAt<15000)return;
+  rkBusy=true;rkErr='';if(tab==='rank')render();const per=RK.period;
+  try{await flushRank(true);const rows=await rpc('get_public_ranking',{p_period:per,p_limit:50});RK.cache[per]={rows:rows||[],at:Date.now()};saveRK();rkLoadedAt=Date.now()}
+  catch(e){rkErr=rkMsg(e);if(String(e&&e.code).includes('sem_liga')){RK.joined=false;saveRK()}}
   rkBusy=false;if(tab==='rank')render();
 }
-function rankEnter(){if(RK.leagues.length)loadRanking(false)}
+function rankEnter(){if(RK.joined)loadRanking(false)}
 function onTaskDone(o){
-  if(!RK.leagues.length)return;const day=dayKey(Date.now());
+  if(!RK.joined)return;const day=dayKey(Date.now());
   RK.queue.push({kind:'task',day,cid:'t'+uid()});if(o&&o.goal)RK.queue.push({kind:'goal',day,cid:'g'+uid()});
   saveRK();flushRank();
 }
 async function flushRank(inner){
-  if(flushing||!RK.queue.length||!navigator.onLine||!RK.leagues.length)return;flushing=true;
+  if(flushing||!RK.queue.length||!navigator.onLine||!RK.joined)return;flushing=true;
   try{
     while(RK.queue.length){const ev=RK.queue[0];
       try{await rpc('record_event',{p_kind:ev.kind,p_client_id:ev.cid,p_day:ev.day})}
       catch(e){const c=String(e&&e.code);if(c.includes('dia_invalido')||c.includes('tipo_invalido')||c.includes('id_invalido')){RK.queue.shift();saveRK();continue}
-        if(c.includes('sem_liga')){RK.queue=[];saveRK();break}throw e}
+        if(c.includes('sem_liga')){RK.queue=[];RK.joined=false;saveRK();break}throw e}
       RK.queue.shift();saveRK();
     }
     if(!inner){rkLoadedAt=0;if(tab==='rank')loadRanking(true)}
@@ -961,77 +1005,148 @@ async function rkRun(btn,fn){
   try{await fn()}catch(e){toast(rkMsg(e))}
   btn.disabled=false;btn.textContent=txt;
 }
-function nickOk(v){v=v.trim().replace(/\s+/g,' ');if(v.length<2||v.length>20){toast(RKMSG.apelido_invalido);return null}return v}
-async function afterJoin(id,msg){
-  await refreshLeagues();RK.active=id||RK.active;saveRK();pendingCode='';
-  try{history.replaceState(null,'',location.pathname)}catch(e){}
-  rkLoadedAt=0;closeSheet();render();loadRanking(true);chime('level');toast(msg);
+const NICK_RE=/^[A-Za-z0-9À-ÖØ-öø-ÿ ._-]+$/;
+function nickErr(v){return v.length<2||v.length>20?'O apelido precisa ter de 2 a 20 caracteres.':!NICK_RE.test(v)?'Use só letras, números, espaço, ponto, hífen ou sublinhado.':''}
+function nickOk(v){v=v.trim().replace(/\s+/g,' ');const e=nickErr(v);if(e){toast(e);return null}return v}
+function resetLabel(per){const d=new Date();
+  if(per==='week'){const n=7-(d.getDay()+6)%7;return n===1?'Zera hoje à meia-noite':`Zera em ${n} dias`}
+  if(per==='month'){const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(),n=last-d.getDate()+1;return n===1?'Zera hoje à meia-noite':`Zera em ${n} dias`}
+  return'Desde que você entrou no ranking'}
+function periodName(per){return per==='week'?'nesta semana':per==='month'?'neste mês':'no total'}
+function ordinal(n){return h('span',{class:'num'},String(n)+'º')}
+/* Entrar no ranking: confirma o apelido e mostra o aviso de que ele fica visível para todos */
+function joinSheet(){
+  const inp=h('input',{type:'text',id:'rkn',maxlength:'20',autocomplete:'nickname',value:RK.nickname||'',placeholder:'Como você quer aparecer'});
+  const go=h('button',{class:'btn gold wide',onclick:()=>{const n=nickOk(inp.value);if(!n)return;
+    rkRun(go,async()=>{const v=await rpc('join_ranking',{p_nickname:n});RK.nickname=typeof v==='string'?v:n;RK.joined=true;rkLoadedAt=0;saveRK();closeSheet();render();loadRanking(true);chime('level');toast('Você entrou no ranking!')})}},'Entrar no ranking');
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')go.click()});
+  openSheet(head('Entrar no ranking','Confirme como você quer aparecer.'),
+    h('div',{class:'field'},h('label',{for:'rkn'},'Apelido'),inp,h('span',{class:'sub',style:'margin:2px 0 0'},'De 2 a 20 caracteres. Precisa ser único entre todos os jogadores.')),
+    h('div',{class:'rk-consent'},ic('users','s'),h('div',null,h('b',null,'Seu apelido e seus pontos ficam públicos'),'Qualquer pessoa que usa o DopamineRun pode ver. Tarefas, fotos e moedas continuam só no seu celular. Você pode sair quando quiser.')),
+    h('div',{class:'actions'},go));
 }
-function joinForm(inSheet){
-  const nick=h('input',{type:'text',id:'rkn'+(inSheet?'s':''),maxlength:'20',autocomplete:'off',placeholder:'Como seus amigos te chamam',value:RK.nickname||''});
-  const code=h('input',{type:'text',id:'rkc'+(inSheet?'s':''),maxlength:'8',autocomplete:'off',autocapitalize:'characters',class:'upper',placeholder:'Ex.: K7M2QX',value:pendingCode||''});
-  const lname=h('input',{type:'text',id:'rkl'+(inSheet?'s':''),maxlength:'30',autocomplete:'off',placeholder:'Ex.: Liga dos amigos'});
-  const joinB=h('button',{class:'btn gold wide',onclick:()=>{const n=nickOk(nick.value);if(!n)return;const c=code.value.trim().toUpperCase();if(c.length<4){toast('Digite o código que você recebeu no convite.');code.focus();return}
-    rkRun(joinB,async()=>{const id=await rpc('join_league',{p_code:c,p_nickname:n});await afterJoin(id,'Você entrou na liga!')})}},'Entrar na liga');
-  const createB=h('button',{class:'btn wide',onclick:()=>{const n=nickOk(nick.value);if(!n)return;const l=lname.value.trim();if(l.length<2){toast(RKMSG.nome_invalido);lname.focus();return}
-    rkRun(createB,async()=>{const r=await rpc('create_league',{p_name:l,p_nickname:n});const row=Array.isArray(r)?r[0]:r;await afterJoin(row&&row.out_id,'Liga criada! Agora convide seus amigos.')})}},'Criar liga');
-  return[h('div',{class:'field'},h('label',{for:nick.id},'Seu apelido no ranking'),nick),
-    h('div',{class:'field'},h('label',{for:code.id},'Código de convite'),code),joinB,
-    h('div',{class:'rk-or'},'ou crie a sua'),
-    h('div',{class:'field'},h('label',{for:lname.id},'Nome da nova liga'),lname),createB];
+function manageSheet(){
+  openSheet(head('Ranking',`Você aparece como ${RK.nickname}`),
+    h('div',{class:'rk-manage'},
+      h('button',{class:'btn ghost wide',onclick:openProfile},ic('edit','s'),'Trocar apelido'),
+      h('button',{class:'btn ghost wide',onclick:()=>{closeSheet();shareApp()}},ic('share','s'),'Chamar amigos para o app')),
+    h('div',{class:'divider'}),
+    h('div',{class:'rk-manage'},
+      confirmBtn('Sair do ranking','Toque de novo para sair',async()=>{try{await rpc('leave_ranking');RK.joined=false;RK.cache={};RK.queue=[];saveRK();closeSheet();render();toast('Você saiu do ranking. Seu apelido não aparece mais.')}catch(e){toast(rkMsg(e))}}),
+      confirmBtn('Apagar meus dados do ranking','Toque de novo para apagar tudo',async()=>{
+        try{await rpc('delete_my_data');try{await sbClient().auth.signOut()}catch(_){}RK=Object.assign(RK,{joined:false,cache:{},queue:[]});saveRK();closeSheet();render();toast('Seus dados do ranking foram apagados do servidor.')}catch(e){toast(rkMsg(e))}})),
+    h('p',{class:'rk-privacy'},'Sair tira você da lista. Apagar também remove seus pontos do servidor. Seu apelido continua salvo só neste celular.'));
 }
-function rulesCard(){return h('div',{class:'rk-card'},h('h3',null,'Como os pontos funcionam'),
-  h('ul',{class:'rk-rules'},h('li',null,'Tarefa concluída: 10 pontos (até 10 tarefas por dia)'),h('li',null,'Meta diária batida: 20 pontos'),h('li',null,'O ranking zera toda segunda-feira'),h('li',null,'Só o apelido e os pontos saem do seu celular')))}
-function invite(l){
-  const url=location.origin+location.pathname+'?liga='+l.code;
-  const text=`Entra na minha liga "${l.name}" no DopamineRun! 1) Abra o link no Safari 2) Compartilhar → Adicionar à Tela de Início 3) No app, vá em Ranking e use o código ${l.code}`;
+function howItWorks(){return[h('div',{class:'rk-how'},
+    h('div',null,ic('check'),h('b',null,'+10'),'por tarefa',h('br'),'(até 10/dia)'),
+    h('div',null,ic('target'),h('b',null,'+20'),'meta do dia batida'),
+    h('div',null,ic('clock'),h('b',null,'3'),'rankings: semana, mês e geral')),
+  h('p',{class:'rk-privacy'},'Só o apelido e os pontos saem do seu celular. Tarefas e fotos ficam aqui.')]}
+function shareApp(){
+  const url=location.origin+location.pathname;
+  const text='Bora competir no DopamineRun? Tarefas viram moedas e tempo de jogo, e tem ranking da semana. Abra no Safari e toque em Compartilhar → Adicionar à Tela de Início.';
   if(navigator.share){navigator.share({title:'DopamineRun',text,url}).catch(()=>{});return}
-  const all=text+'\n'+url;(navigator.clipboard?navigator.clipboard.writeText(all):Promise.reject()).then(()=>toast('Convite copiado. Cole no WhatsApp.'),()=>toast(`Código da liga: ${l.code}`));
+  (navigator.clipboard?navigator.clipboard.writeText(text+'\n'+url):Promise.reject()).then(()=>toast('Convite copiado. Cole no WhatsApp.'),()=>toast(url));
+}
+function rankMsg(rows,me,per){
+  if(!me)return null;const others=rows.filter(r=>!r.is_me);
+  if(!others.length)return'Você é o primeiro jogador do ranking. Chame os amigos!';
+  const ahead=rows.filter(r=>!r.is_me&&r.points>me.points).sort((x,y)=>x.points-y.points)[0];
+  if(!ahead){const next=rows.filter(r=>!r.is_me).sort((x,y)=>y.points-x.points)[0],lead=me.points-next.points;
+    return lead>0?`Você lidera ${periodName(per)} com ${fmt(lead)} ${plural(lead,'ponto','pontos')} de vantagem. Segura!`:`Empate no topo com ${next.nick}. Uma tarefa te coloca na frente.`}
+  const diff=ahead.points-me.points,t=Math.ceil((diff+1)/10);
+  return`Faltam ${fmt(diff+1)} pontos para passar ${ahead.nick}: ${t} ${plural(t,'tarefa','tarefas')}.`;
 }
 function viewRank(){
-  const frag=h('div',null,h('div',{class:'sec-head'},h('h2',null,'Ranking')));
-  if(!RK.leagues.length){
-    frag.append(h('p',{class:'sub'},'Dispute com amigos quem conclui mais tarefas na semana.'),h('div',{class:'rk-card'},joinForm(false)),rulesCard());
-    if(!isStandalone()&&isIOS())frag.append(h('p',{class:'rk-note'},ic('share','s'),'Instale o app antes de entrar numa liga: o ranking fica guardado no app da tela de início.'));
+  const frag=h('div',null);
+  if(!RK.joined){
+    frag.append(h('div',{class:'rk-hero',style:'margin-top:18px'},h('div',{class:'trophy'},ic('trophy')),
+      h('h2',null,'Ranking de jogadores'),h('p',null,'Veja quem mais conclui tarefas na semana, no mês e desde o começo. Todo mundo que entra aparece no mesmo ranking.'),
+      h('div',{class:'btns'},h('button',{class:'btn gold wide',onclick:joinSheet},ic('trophy','s'),'Entrar no ranking'))));
+    if(RK.nickname)frag.append(h('div',{class:'rk-meline'},'Você vai aparecer como',h('b',null,RK.nickname),h('button',{class:'linkbtn',onclick:openProfile},'Alterar')));
+    frag.append(...howItWorks());
+    if(!isStandalone()&&isIOS())frag.append(h('p',{class:'rk-note'},ic('share','s'),'Instale o app antes de entrar no ranking: seus pontos ficam guardados no app da tela de início.'));
     return frag;
   }
-  const l=RK.leagues.find(x=>x.id===RK.active)||RK.leagues[0],c=RK.cache[l.id];
-  if(RK.leagues.length>1)frag.append(h('div',{class:'rk-chips'},RK.leagues.map(x=>h('button',{'aria-pressed':String(x.id===l.id),onclick:()=>{RK.active=x.id;saveRK();rkLoadedAt=0;render();loadRanking(true)}},x.name))));
-  frag.append(h('div',{class:'rk-head'},h('div',{class:'t'},l.name),h('div',{class:'m'},`${l.members} ${plural(l.members,'pessoa','pessoas')} · código `,h('b',{class:'upper'},l.code)),h('div',{class:'m'},weekLabel()),
-    h('div',{class:'row2'},h('button',{class:'btn gold',onclick:()=>invite(l)},ic('share','s'),'Convidar amigos'),h('button',{class:'btn','aria-label':'Atualizar ranking',onclick:()=>loadRanking(true)},ic('refresh','s'),rkBusy?'…':'Atualizar'))));
-  const list=h('div',{class:'list',style:'margin-top:12px'});
-  if(c&&c.rows&&c.rows.length){c.rows.forEach((r,i)=>list.append(h('div',{class:'rk-row'+(r.is_me?' me':'')},h('div',{class:'rk-pos'+(i<3&&r.points>0?' p'+(i+1):'')},i+1),
-    h('div',{class:'rk-name'},r.nickname+(r.is_me?' (você)':''),h('small',null,`${r.tasks} ${plural(r.tasks,'tarefa','tarefas')} · ${r.goals} ${plural(r.goals,'meta','metas')}`)),
-    h('div',{class:'rk-pts'},fmt(r.points),h('small',null,'pontos')))))}
-  else list.append(h('div',{class:'empty'},rkBusy?'Carregando o ranking…':'Ainda sem pontos nesta semana. Conclua uma tarefa para largar na frente.'));
+  const per=RK.period,c=RK.cache[per],rows=(c&&c.rows)||[],me=rows.find(r=>r.is_me);
+  frag.append(h('div',{class:'rk-title'},h('div',null,h('h2',null,'Ranking'),h('small',null,rows.length?`${fmt(rows[0].total)} ${plural(rows[0].total,'jogador','jogadores')}`:'Todos os jogadores')),
+    h('button',{class:'icon-btn','aria-label':'Opções do ranking',onclick:manageSheet},ic('dots'))));
+  frag.append(h('div',{class:'seg',role:'tablist','aria-label':'Período'},PERIODS.map(([k,label])=>h('button',{role:'tab','aria-selected':String(k===per),onclick:()=>{if(RK.period===k)return;RK.period=k;saveRK();rkLoadedAt=0;render();loadRanking(true)}},label))));
+  const hero=h('div',{class:'rk-hero',style:'margin-top:12px'});
+  if(me){
+    hero.append(h('div',{class:'rk-status'},h('div',{class:'rk-place'},ordinal(me.pos),h('small',null,`lugar de ${fmt(me.total)}`)),
+      h('div',{class:'pts'},h('b',null,fmt(me.points)),`${plural(me.points,'ponto','pontos')} ${periodName(per)}`)),
+      h('div',{class:'rk-msg'},rankMsg(rows,me,per)));
+  }else hero.append(h('div',{class:'rk-msg',style:'margin-top:0'},rkBusy?'Carregando sua posição…':'Toque em atualizar para ver sua posição.'));
+  hero.append(h('div',{class:'rk-chip'},ic('clock'),resetLabel(per)),
+    h('div',{class:'row2'},h('button',{class:'btn gold',onclick:shareApp},ic('share','s'),'Chamar amigos'),
+      h('button',{class:'btn glass','aria-label':'Atualizar ranking',onclick:()=>loadRanking(true)},rkBusy?'…':ic('refresh'))));
+  frag.append(hero);
+  const list=h('div',{class:'list',style:'margin-top:14px'});
+  if(rows.length){const top=Math.max(1,rows[0].points);let prev=0;
+    rows.forEach(r=>{if(prev&&r.pos>prev+1&&r.is_me)list.append(h('div',{class:'rk-gap','aria-hidden':'true'},'• • •'));prev=r.pos;
+      list.append(h('div',{class:'rk-row'+(r.is_me?' me':'')},h('div',{class:'rk-pos'+(r.pos<=3&&r.points>0?' p'+r.pos:'')},r.pos),
+        h('div',{class:'rk-name'},r.nick+(r.is_me?' (você)':''),h('small',null,`${r.tasks} ${plural(r.tasks,'tarefa','tarefas')} · ${r.goals} ${plural(r.goals,'meta','metas')}`),h('div',{class:'rk-bar'},h('i',{style:`width:${Math.round(r.points/top*100)}%`}))),
+        h('div',{class:'rk-pts'},fmt(r.points),h('small',null,'pontos'))))})}
+  else list.append(h('div',{class:'empty'},rkBusy?'Carregando o ranking…':'Ainda sem pontos neste período. Conclua uma tarefa para largar na frente.'));
   frag.append(list);
   if(RK.queue.length)frag.append(h('p',{class:'rk-note'},ic('clock','s'),`${RK.queue.length} ${plural(RK.queue.length,'pontuação aguardando','pontuações aguardando')} internet para enviar.`));
   if(rkErr)frag.append(h('p',{class:'rk-note',style:'color:var(--rose)'},rkErr));
-  else if(c&&c.at)frag.append(h('p',{class:'rk-note'},`Atualizado às ${new Date(c.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`));
-  frag.append(rulesCard(),h('div',{class:'rk-danger'},
-    h('button',{class:'btn ghost',onclick:()=>openSheet(head('Entrar em outra liga','Use o código do convite ou crie uma nova.'),...joinForm(true))},'Outra liga'),
-    confirmBtn('Sair da liga','Sim, sair',async()=>{try{await rpc('leave_league',{p_league:l.id});delete RK.cache[l.id];await refreshLeagues();render();toast('Você saiu da liga.')}catch(e){toast(rkMsg(e))}})),
-    h('div',{class:'rk-danger',style:'margin-top:10px'},confirmBtn('Apagar meus dados do ranking','Sim, apagar tudo',async()=>{
-      try{await rpc('delete_my_data');try{await sbClient().auth.signOut()}catch(_){}RK={nickname:'',leagues:[],active:null,cache:{},queue:[]};saveRK();render();toast('Seus dados do ranking foram apagados.')}catch(e){toast(rkMsg(e))}})));
+  else if(c&&c.at)frag.append(h('p',{class:'rk-note'},`Atualizado às ${new Date(c.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}. Mostra os 50 primeiros.`));
+  frag.append(...howItWorks());
   return frag;
 }
+/* ---------- Perfil: alterar o apelido (e no ranking, se a pessoa já entrou) ---------- */
+function openProfile(){
+  const lv=levelOf(M.state.xp||0);
+  const inp=h('input',{type:'text',id:'pf-nick',maxlength:'20',autocomplete:'nickname',value:RK.nickname||''});
+  const go=h('button',{class:'btn wide',onclick:()=>{const n=nickOk(inp.value);if(!n)return;if(n===RK.nickname){closeSheet();return}
+    rkRun(go,async()=>{let v=n;if(RK.joined){const r=await rpc('join_ranking',{p_nickname:n});if(typeof r==='string')v=r;rkLoadedAt=0}
+      RK.nickname=v;saveRK();closeSheet();render();if(tab==='rank')loadRanking(true);toast('Apelido atualizado.')})}},'Salvar apelido');
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')go.click()});
+  openSheet(head('Seu perfil',`Nível ${lv.L} · ${fmt(M.state.xp||0)} XP no total`),
+    h('div',{class:'field'},h('label',{for:'pf-nick'},'Apelido'),inp,
+      h('span',{class:'sub',style:'margin:2px 0 0'},RK.joined?'Muda também no ranking público.':'Aparece só no ranking, se você entrar nele.')),
+    h('div',{class:'actions'},go));
+}
+/* ---------- iOS 26: ajuste manual do fundo da tela (diagnóstico do bug WebKit 301108) ---------- */
+const VPK='dopaminerun-vp-gap';
+function vpGap(){try{return Math.max(0,Math.min(90,parseInt(localStorage.getItem(VPK)||'0',10)||0))}catch(e){return 0}}
+function applyVp(v){document.documentElement.style.setProperty('--vp-gap',(v||0)+'px')}
+function vpMeasure(){
+  const pr=h('div',{style:'position:fixed;left:0;top:0;width:1px;visibility:hidden;pointer-events:none;height:100lvh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:content-box'});
+  document.body.append(pr);const cs=getComputedStyle(pr),lvh=pr.getBoundingClientRect().height-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  pr.style.height='100svh';const svh=pr.getBoundingClientRect().height-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
+  const top=parseFloat(cs.paddingTop),bot=parseFloat(cs.paddingBottom);pr.remove();
+  const vv=window.visualViewport?Math.round(visualViewport.height):0;
+  return`tela ${screen.width}×${screen.height} · janela ${innerWidth}×${innerHeight} · vv ${vv} · lvh ${Math.round(lvh)} · svh ${Math.round(svh)} · seguras ${Math.round(top)}/${Math.round(bot)} · app ${isStandalone()?'instalado':'navegador'} · ajuste ${vpGap()}`;
+}
+function vpSettings(){
+  if(!(isIOS()&&isStandalone())&&!/[?&]diag=1/.test(location.search))return null;
+  const r=h('input',{type:'range',min:'0',max:'90',step:'1',value:String(vpGap()),'aria-label':'Ajuste da barra de navegação'});
+  const out=h('output',null,vpGap()+' px'),diag=h('div',{class:'vp-diag'},vpMeasure());
+  r.addEventListener('input',()=>{const v=parseInt(r.value,10)||0;out.textContent=v+' px';applyVp(v);try{localStorage.setItem(VPK,String(v))}catch(e){}diag.textContent=vpMeasure()});
+  return[h('div',{class:'divider'}),h('div',{class:'field'},h('label',null,'Encaixe da barra de navegação'),
+    h('span',{class:'sub',style:'margin:0'},'Se sobrar um espaço embaixo dos ícones, arraste até a barra encostar no fim da tela.'),
+    h('div',{class:'vp-row'},r,out),diag)];
+}
+applyVp(vpGap());
 
-
-/* ---------- Apelido na primeira abertura (obrigatório; fica só no aparelho até entrar numa liga) ---------- */
+/* ---------- Apelido na primeira abertura (obrigatório; fica só no aparelho até entrar no ranking) ---------- */
 function needNick(){return !String(RK.nickname||'').trim()&&!(isIOS()&&!isStandalone())}
 function askNick(){
   const box=$('#nick');if(!box||box.classList.contains('on'))return;
   const inp=h('input',{type:'text',id:'nick-in',maxlength:'20',autocomplete:'nickname',autocapitalize:'words',enterkeyhint:'done',placeholder:'Ex.: Ana, Rafa, Thi'});
   const err=h('div',{class:'nick-err',id:'nick-err',role:'alert'});
   const save=()=>{const v=inp.value.trim().replace(/\s+/g,' ');
-    if(v.length<2||v.length>20){err.textContent='O apelido precisa ter de 2 a 20 caracteres.';inp.focus();return}
+    const m=nickErr(v);if(m){err.textContent=m;inp.focus();return}
     RK.nickname=v;saveRK();box.classList.remove('on');box.replaceChildren();render();toast(`Prontinho, ${v}!`)};
   inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();save()}});
   inp.addEventListener('input',()=>{err.textContent=''});
   box.replaceChildren(h('div',{class:'nick-card'},
     h('div',{class:'nick-ic','aria-hidden':'true'},ic('trophy')),
     h('h2',{id:'nick-title'},'Como você quer ser chamado?'),
-    h('p',null,'Seu apelido serve só para o ranking com amigos. Ele fica guardado neste celular e só é enviado se você entrar numa liga.'),
+    h('p',null,'Seu apelido serve só para o ranking. Ele fica guardado neste celular e só aparece para outras pessoas se você entrar no ranking.'),
     h('div',{class:'field'},h('label',{for:'nick-in'},'Nome ou apelido'),inp),err,
     h('button',{class:'btn gold wide',onclick:save},'Salvar e começar')));
   box.classList.add('on');setTimeout(()=>{try{inp.focus()}catch(e){}},350);
@@ -1044,7 +1159,6 @@ function askNick(){
     const m=await IDB.get('kv','model');
     if(m){M=Object.assign(blank(),m);M.state=Object.assign(blankState(),m.state)}
   }catch(e){storageOk=false;console.warn(e)}
-  try{const q=new URLSearchParams(location.search).get('liga');if(q){pendingCode=q.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);if(!RK.leagues.length)tab='rank'}}catch(e){}
   shown=null;render();
   if(needNick())askNick();
   if(RK.queue.length)flushRank();
