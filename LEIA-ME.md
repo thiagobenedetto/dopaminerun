@@ -55,3 +55,8 @@ Se você remover o app da tela de início, os dados são apagados junto. Faça b
 ## Atualizar o app
 Envie os arquivos novos para o mesmo repositório (substituindo os antigos).
 A nova versão entra na segunda vez que você abrir o app. Seus dados não são afetados.
+
+**Atualização 4.1 (iOS 26):** para acabar com o espaço vazio embaixo da barra de navegação, é preciso reinstalar o app uma única vez. O iOS só lê o estilo da barra de status na instalação.
+1. Ajustes → **Fazer backup** (se já tiver dados).
+2. Remova o app da Tela de Início e adicione de novo pelo Safari.
+3. Ajustes → **Restaurar**. A conta do ranking precisa entrar de novo na liga.
