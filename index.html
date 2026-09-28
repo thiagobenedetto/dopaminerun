@@ -116,7 +116,14 @@ h2{font-size:23px;font-weight:800;margin:0;letter-spacing:-.01em}
 .checkc.done{background:var(--ok);border-color:var(--ok);color:#fff}
 .empty{background:var(--surface);border:1.5px dashed var(--line);border-radius:20px;padding:18px;color:var(--muted)}
 .suggest{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.suggest button{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;min-height:40px;padding:6px 14px;font-size:15px;font-weight:600}
+.adhoc{margin-top:12px}
+.group-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:16px 2px 8px;font-weight:800;font-size:16px}
+.group-head small{color:var(--muted);font-weight:600;font-size:13px}
+.cat{margin-top:16px}.cat-name{font-weight:800;font-size:15px;margin-bottom:-4px}
+.suggest button[aria-pressed="true"]{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.suggest button .ic{width:15px;height:15px}
+.hint{font-size:13px;color:var(--muted);margin:-8px 0 0 2px}
+.suggest button{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:999px;min-height:40px;padding:6px 14px;font-size:15px;font-weight:600}
 
 /* Game rewards */
 .game{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:14px 14px 14px 16px;box-shadow:var(--shadow)}
@@ -244,6 +251,36 @@ dialog::backdrop{background:rgba(8,10,28,.55)}
 .foot{color:var(--muted);font-size:13px;text-align:center;margin-top:28px}
 #zoom img{width:100%;border-radius:18px;margin-top:12px}
 .center{text-align:center}
+nav button{font-size:12px}nav button .ic-wrap{width:50px}
+.rk-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}
+.rk-card+.rk-card{margin-top:12px}
+.rk-card h3{margin:0 0 2px;font-size:19px;font-weight:800}
+.rk-or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;margin:14px 0 2px}.rk-or::before,.rk-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.rk-head{background:var(--accent);color:#fff;border-radius:24px;padding:16px 16px 14px}
+.rk-head .t{font-size:24px;font-weight:800;line-height:1.1}
+.rk-head .m{font-size:14px;opacity:.9;margin-top:2px}
+.rk-head .row2{display:flex;gap:8px;margin-top:12px}
+.rk-head .btn{background:rgba(255,255,255,.16);color:#fff;min-height:40px;font-size:15px}
+.rk-head .btn.gold{background:var(--gold);color:#3A2600}
+.rk-row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px 14px 10px 10px}
+.rk-row.me{border:2px solid var(--gold);background:color-mix(in srgb,var(--gold) 10%,var(--surface))}
+.rk-pos{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex:none;background:var(--surface-2);color:var(--muted);font-size:16px}
+.rk-pos.p1{background:radial-gradient(circle at 34% 30%,#FFE7A3 0 16%,#FFBE2E 45%,#B97E00 100%);color:#5B3D00}
+.rk-pos.p2{background:radial-gradient(circle at 34% 30%,#fff 0 16%,#C9CED8 45%,#6F7788 100%);color:#2E3340}
+.rk-pos.p3{background:radial-gradient(circle at 34% 30%,#FFD9B0 0 16%,#D0843F 45%,#7A4210 100%);color:#3E1F00}
+.rk-name{flex:1;min-width:0;font-weight:700;font-size:17px;line-height:1.15;overflow-wrap:anywhere}
+.rk-name small{display:block;color:var(--muted);font-weight:500;font-size:13px}
+.rk-pts{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;text-align:right;line-height:1}
+.rk-pts small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.rk-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.rk-chips button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;min-height:38px;padding:4px 14px;font-weight:700;font-size:14px}
+.rk-chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rk-rules{font-size:14px;color:var(--muted);line-height:1.5;margin:0;padding-left:18px}
+.rk-note{font-size:13px;color:var(--muted);margin:10px 2px 0;display:flex;gap:6px;align-items:center}
+.rk-danger{display:flex;gap:10px;margin-top:18px}.rk-danger .btn{flex:1;min-height:44px;font-size:14px}
+.install{display:flex;gap:10px;align-items:center;background:var(--surface);border:1.5px dashed var(--accent);border-radius:18px;padding:12px 12px 12px 14px;margin-top:10px;font-size:14px}
+.install div{flex:1}.install b{display:block;font-size:15px}
+.upper{text-transform:uppercase;letter-spacing:.12em;font-weight:800}
 .backup{display:grid;gap:10px;margin-top:4px}
 .backup .row2{display:flex;gap:10px}.backup .row2>*{flex:1}
 .backup label.btn{cursor:pointer}
@@ -273,6 +310,9 @@ dialog::backdrop{background:rgba(8,10,28,.55)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5v1.5A3.5 3.5 0 0 0 8.5 11M16 6h3v1.5a3.5 3.5 0 0 1-3.5 3.5"/><path d="M12 13v4M8.5 20h7M10 17h4"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 7.5L12 3.5l4 4"/><path d="M6 11H5v9h14v-9h-1"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 4v4.5h-4.5"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
 <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></symbol>
@@ -306,6 +346,7 @@ dialog::backdrop{background:rgba(8,10,28,.55)}
 <div class="party" id="party" role="dialog" aria-modal="true" aria-label="Recompensa"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="supabase.js"></script>
 <script>
 const $=(s,r=document)=>r.querySelector(s);
 const NS='http://www.w3.org/2000/svg';
@@ -440,7 +481,7 @@ function tone(seq,gap=.09){if(!soundOn)return;try{actx=actx||new(window.AudioCon
 const SFX={earn:[660,880,1320],lucky:[660,880,1100,1320,1760],spend:[880,660],end:[880,660,880,660],level:[523,659,784,1047,1319],rattle:[300,340,380,420,470,520,580,650],open:[784,1047,1319,1568],legend:[523,659,784,1047,1319,1568,2093],tap:[1200]};
 const chime=k=>tone(SFX[k],k==='rattle'?.11:.09);
 function buzz(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
-let tt;function toast(msg){const t=$('#toast');t.textContent=msg;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',3600)}
+let tt;function toast(msg){const t=$('#toast');const dg=document.getElementById('dlg'),host=dg&&dg.open?dg:document.body;if(t.parentNode!==host)host.append(t);t.textContent=msg;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',3600)}
 
 /* ---------- HUD ---------- */
 let shown=null;
@@ -480,20 +521,24 @@ setInterval(()=>{if(M.state.timer)renderTimer()},1000);
 function startTimer(name,minutes){const now=Date.now(),cur=M.state.timer&&M.state.timer.endsAt>now?M.state.timer:null;return cur?{name,startedAt:cur.startedAt,endsAt:cur.endsAt+minutes*60000}:{name,startedAt:now,endsAt:now+minutes*60000}}
 
 /* ---------- Nav & render ---------- */
-const TABS=[['tasks','list','Hoje'],['chests','chest','Baús'],['games','pad','Jogos'],['hist','history','Histórico']];
+const TABS=[['tasks','list','Hoje'],['chests','chest','Baús'],['games','pad','Jogos'],['rank','trophy','Ranking'],['hist','history','Histórico']];
 function renderNav(){
   $('#navin').replaceChildren(...TABS.map(([id,icon,label])=>{
     const n=id==='chests'?M.state.chests.length:0;
-    return h('button',{'aria-current':tab===id?'page':false,'aria-label':label+(n?`, ${n} ${plural(n,'baú','baús')} para abrir`:''),onclick:()=>{if(tab!==id){tab=id;render();window.scrollTo({top:0})}}},
+    return h('button',{'aria-current':tab===id?'page':false,'aria-label':label+(n?`, ${n} ${plural(n,'baú','baús')} para abrir`:''),onclick:()=>{if(tab!==id){tab=id;render();window.scrollTo({top:0});if(id==='rank')rankEnter()}}},
       h('span',{class:'ic-wrap'},ic(icon)),label,n?h('i',{class:'badge','aria-hidden':'true'},n):null)}));
 }
 function render(){
   renderHud();renderNav();renderTimer();
-  $('#main').replaceChildren(tab==='tasks'?viewTasks():tab==='chests'?viewChests():tab==='games'?viewGames():viewHist());
+  $('#main').replaceChildren(tab==='tasks'?viewTasks():tab==='chests'?viewChests():tab==='games'?viewGames():tab==='rank'?viewRank():viewHist());
   const lb=lastBackup(),old=Date.now()-lb>7*864e5&&Object.keys(M.log).length>5;$('#foot').textContent=!storageOk?'Não foi possível acessar o armazenamento do iPhone.':old?(lb?'Seu último backup tem mais de 7 dias. Faça um em Ajustes.':'Dados guardados neste iPhone. Faça um backup em Ajustes.'):'';
 }
 
-const TASK_IDEAS=[['Arrumar a cama',5],['Lavar a louça',15],['Estudar 25 minutos',20],['Levar o lixo',5],['Separar a roupa suja',10],['Responder 3 mensagens',10]];
+const CATALOG={
+  'Casa':[['Arrumar a cama',5],['Lavar a louça',15],['Levar o lixo',5],['Separar a roupa suja',10],['Varrer a casa',15],['Regar as plantas',5]],
+  'Estudo':[['Estudar 25 minutos',20],['Ler 10 páginas',10],['Revisar anotações',10],['Praticar um idioma',15]],
+  'Saúde':[['Beber 2 copos de água',5],['Caminhar 15 minutos',15],['Alongar 5 minutos',5],['Tomar café da manhã',5]],
+  'Trabalho':[['Planejar o dia',10],['Responder 3 mensagens',10],['Focar 25 minutos',20],['Organizar a mesa',10]]};
 const GAME_IDEAS=[['Jogo online',30,50],['Uma partida ranqueada',20,30],['Jogo online',60,90]];
 
 function todayCard(){
@@ -509,21 +554,42 @@ function todayCard(){
     h('p',{class:'goal-txt'},done?`Meta batida: ${n} de ${g}. Tudo agora é extra.`:`${n} de ${g} tarefas · ${g-n===1?'falta 1':'faltam '+(g-n)} para ganhar +5`),
     h('div',{class:'pills'},pills));
 }
+function doneToday(t,today){return Object.values(M.log).filter(l=>l.taskId===t.id&&dayKey(l.ts)===today).length}
+function taskCard(t,today){
+  const k=doneToday(t,today);
+  const meta=[t.daily?[ic('clock','s'),'Todo dia']:null,k?(t.daily?' · ':'')+(k===1?'feita hoje':`feita ${k}× hoje`):null].filter(Boolean).flat();
+  return h('button',{class:'task','aria-label':`Concluir ${t.title}, vale ${t.coins} moedas`+(t.daily?', tarefa de todo dia':'')+(k?`, feita ${k} ${plural(k,'vez','vezes')} hoje`:''),onclick:()=>openComplete(t)},
+    h('span',{class:'task-body'},h('span',{class:'task-title'},t.title),meta.length?h('span',{class:'task-meta'},meta):null),
+    h('span',{class:'reward'},`+${t.coins}`,miniCoin()),
+    h('span',{class:'checkc'+(k?' done':'')},ic('check')));
+}
 function viewTasks(){
-  const tasks=Object.values(M.tasks).sort((a,b)=>a.created-b.created),today=dayKey(Date.now());
-  const frag=h('div',null,todayCard(),h('div',{class:'sec-head'},h('h2',null,'Tarefas'),h('button',{class:'btn small soft',onclick:()=>editTask()},ic('plus','s'),'Nova')));
-  if(!tasks.length){frag.append(h('div',{class:'empty'},h('div',null,'Comece com tarefas curtas: recompensa rápida mantém o ritmo. Toque para adicionar:'),
-    h('div',{class:'suggest'},TASK_IDEAS.map(([t,c])=>h('button',{onclick:()=>{const id=uid();putDoc('tasks',id,{id,title:t,coins:c,photo:true,created:Date.now()})}},`${t} · +${c}`)))));return frag}
-  const list=h('div',{class:'list'});
-  for(const t of tasks){
-    const k=Object.values(M.log).filter(l=>l.taskId===t.id&&dayKey(l.ts)===today).length;
-    const meta=[t.photo?[ic('camera','s'),'Foto']:null,k?`${t.photo?' · ':''}feita ${k}× hoje`:null].filter(Boolean).flat();
-    list.append(h('button',{class:'task','aria-label':`Concluir ${t.title}, vale ${t.coins} moedas`+(k?`, feita ${k} vezes hoje`:''),onclick:()=>openComplete(t)},
-      h('span',{class:'task-body'},h('span',{class:'task-title'},t.title),meta.length?h('span',{class:'task-meta'},meta):null),
-      h('span',{class:'reward'},`+${t.coins}`,miniCoin()),
-      h('span',{class:'checkc'+(k?' done':'')},ic('check'))));
-  }
-  frag.append(list);return frag;
+  const all=Object.values(M.tasks).sort((a,b)=>a.created-b.created),today=dayKey(Date.now());
+  const daily=all.filter(t=>t.daily),other=all.filter(t=>!t.daily);
+  const frag=h('div',null,installBanner(),todayCard(),
+    h('button',{class:'btn soft wide adhoc',onclick:()=>openComplete(null)},ic('spark','s'),'Concluí outra coisa'),
+    h('div',{class:'sec-head'},h('h2',null,'Tarefas'),h('button',{class:'btn small soft',onclick:openAdd},ic('plus','s'),'Nova')));
+  if(!all.length){frag.append(h('div',{class:'empty'},h('div',null,'Escolha tarefas prontas para começar ou crie as suas. Tarefas curtas dão recompensa rápida.'),
+    h('div',{class:'actions',style:'margin-top:14px'},h('button',{class:'btn gold',onclick:openAdd},ic('plus','s'),'Escolher tarefas'))));return frag}
+  if(daily.length){const d=daily.filter(t=>doneToday(t,today)).length;
+    frag.append(h('div',{class:'group-head'},h('span',null,'Todo dia'),h('small',null,d===daily.length?'Todas feitas hoje':`${d} de ${daily.length} feitas hoje`)),h('div',{class:'list'},daily.map(t=>taskCard(t,today))))}
+  if(other.length)frag.append(h('div',{class:'group-head'},h('span',null,daily.length?'Outras tarefas':'Suas tarefas')),h('div',{class:'list'},other.map(t=>taskCard(t,today))));
+  if(!daily.length)frag.append(h('p',{class:'sub',style:'margin-top:12px'},'Dica: ao concluir, marque "Faço isso todo dia" e a tarefa fica fixa no topo da lista.'));
+  return frag;
+}
+function openAdd(){
+  const sw=h('input',{type:'checkbox',class:'switch',id:'addDaily'});sw.checked=true;
+  const have=new Set(Object.values(M.tasks).map(t=>t.title.toLowerCase()));
+  const groups=Object.entries(CATALOG).map(([cat,items])=>h('div',{class:'cat'},h('div',{class:'cat-name'},cat),h('div',{class:'suggest'},items.map(([title,c])=>{
+    const added=have.has(title.toLowerCase());
+    const b=h('button',{type:'button','aria-pressed':String(added),disabled:added,onclick:()=>{
+      const id=uid();putDoc('tasks',id,{id,title,coins:c,daily:sw.checked,created:Date.now()});have.add(title.toLowerCase());
+      b.disabled=true;b.setAttribute('aria-pressed','true');b.replaceChildren(ic('check'),title);chime('tap');toast(`“${title}” adicionada.`)}},
+      added?[ic('check'),title]:`${title} · +${c}`);return b}))));
+  openSheet(head('Adicionar tarefas','Toque nas tarefas prontas ou crie a sua.'),
+    h('button',{class:'btn wide',style:'margin-top:14px',onclick:()=>editTask()},ic('plus','s'),'Criar tarefa do zero'),
+    h('label',{class:'switch-row',for:'addDaily'},h('span',null,'Adicionar como "todo dia"'),sw),
+    groups,h('div',{class:'actions'},h('button',{class:'btn ghost',onclick:closeSheet},'Pronto')));
 }
 
 function chestSVG(rar,big){
@@ -623,7 +689,7 @@ function viewHist(){
 
 /* ---------- Sheets ---------- */
 const dlg=$('#dlg'),sheet=$('#sheet');
-function openSheet(...kids){sheet.replaceChildren(h('div',{class:'grip','aria-hidden':'true'}),...kids);if(!dlg.open)dlg.showModal();sheet.scrollTop=0}
+function openSheet(...kids){sheet.replaceChildren(h('div',{class:'grip','aria-hidden':'true'}),...kids.flat(3).filter(k=>k!=null&&k!==false));if(!dlg.open)dlg.showModal();sheet.scrollTop=0}
 function closeSheet(){if(dlg.open)dlg.close()}
 dlg.addEventListener('click',e=>{if(e.target===dlg)closeSheet()});
 function head(title,lead,extra){return h('div',{class:'sheet-head'},h('div',null,h('h3',{id:'sheet-title'},title),lead?h('p',{class:'lead'},lead):null),extra||null)}
@@ -649,17 +715,17 @@ function confirmBtn(label,armedLabel,onConfirm){let armed=false,tm;const b=h('bu
   armed=true;b.textContent=armedLabel;b.classList.add('armed');buzz(20);
   tm=setTimeout(()=>{armed=false;b.textContent=label;b.classList.remove('armed')},4000)}},label);return b}
 function quickPick(input,values){const wrap=h('div',{class:'quick'});const paint=()=>wrap.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.textContent===String(input.value))));
-  values.forEach(v=>wrap.append(h('button',{type:'button',onclick:()=>{input.value=v;paint()}},v)));input.addEventListener('input',paint);paint();return wrap}
+  values.forEach(v=>wrap.append(h('button',{type:'button',onclick:()=>{input.value=v;input.dispatchEvent(new Event('input'))}},v)));input.addEventListener('input',paint);paint();return wrap}
 function editTask(t){
   const title=h('input',{type:'text',id:'ft',value:t?t.title:'',placeholder:'Ex.: Lavar a louça',maxlength:'80',autocomplete:'off'});
   const coins=h('input',{type:'number',id:'fc',inputmode:'numeric',min:'1',max:'500',value:t?t.coins:10});
-  const photo=h('input',{type:'checkbox',class:'switch',id:'fp'});photo.checked=t?!!t.photo:true;
-  const save=()=>{const v=title.value.trim(),c=Math.max(1,Math.min(500,parseInt(coins.value)||0));if(!v){title.focus();toast('Dê um nome para a tarefa.');return}const id=t?t.id:uid();putDoc('tasks',id,{id,title:v,coins:c,photo:photo.checked,created:t?t.created:Date.now()});closeSheet();if(!t)toast('Tarefa criada.')};
+  const daily=h('input',{type:'checkbox',class:'switch',id:'fd'});daily.checked=t?!!t.daily:false;
+  const save=()=>{const v=title.value.trim(),c=Math.max(1,Math.min(500,parseInt(coins.value)||0));if(!v){title.focus();toast('Dê um nome para a tarefa.');return}const id=t?t.id:uid();putDoc('tasks',id,{id,title:v,coins:c,daily:daily.checked,created:t?t.created:Date.now()});closeSheet();if(!t)toast('Tarefa criada.')};
   title.addEventListener('keydown',e=>{if(e.key==='Enter')save()});
   openSheet(head(t?'Editar tarefa':'Nova tarefa'),
     h('div',{class:'field'},h('label',{for:'ft'},'Tarefa'),title),
     h('div',{class:'field'},h('label',{for:'fc'},'Moedas que ela vale'),coins,quickPick(coins,[5,10,15,20,30])),
-    h('label',{class:'switch-row',for:'fp'},h('span',null,'Exigir foto para concluir'),photo),
+    h('label',{class:'switch-row',for:'fd'},h('span',null,'Faço isso todo dia'),daily),
     h('div',{class:'actions'},
       t?confirmBtn('Excluir','Sim, excluir',()=>{delDoc('tasks',t.id);closeSheet();toast(`Tarefa “${t.title}” excluída. O histórico continua.`)}):null,
       h('button',{class:'btn',onclick:save},'Salvar tarefa')));
@@ -698,52 +764,72 @@ async function shrink(file,max,asUrl){
   return asUrl?c.toDataURL('image/jpeg',.7):new Promise(r=>c.toBlob(r,'image/jpeg',.82));
 }
 function openComplete(t){
-  const cur={blob:null,ai:null},s=M.state;
+  const adhoc=!t,cur={blob:null,ai:null},s=M.state;
+  const nameIn=adhoc?h('input',{type:'text',id:'an',placeholder:'Ex.: Organizei o armário',maxlength:'80',autocomplete:'off'}):null;
+  const coinsIn=adhoc?h('input',{type:'number',id:'ac',inputmode:'numeric',min:'1',max:'500',value:10}):null;
+  const title=()=>adhoc?nameIn.value.trim():t.title;
+  const base=()=>adhoc?Math.max(1,Math.min(500,parseInt(coinsIn.value)||0)):t.coins;
+  const dailySw=(adhoc||!t.daily)?h('input',{type:'checkbox',class:'switch',id:'cd'}):null;
+  const done=h('button',{class:'btn gold wide'});
+  const paintDone=()=>{done.textContent=`Concluir e ganhar ${base()+(cur.blob?1:0)}`};
+  if(coinsIn)coinsIn.addEventListener('input',paintDone);
   const media=h('div'),aiBox=h('div');
-  const done=h('button',{class:'btn gold wide',disabled:!!t.photo},t.photo?'Envie a foto para concluir':`Concluir e ganhar ${t.coins}`);
   const onFile=async e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;
     try{cur.blob=await shrink(f,1080)}catch(err){toast('Não consegui ler essa imagem. Tente outra foto.');return}
-    cur.ai=null;paintMedia();done.disabled=false;done.textContent=`Concluir e ganhar ${t.coins}`;paintAi();chime('tap')};
+    cur.ai=null;paintMedia();paintDone();paintAi();chime('tap')};
   const cam=h('input',{type:'file',accept:'image/*',capture:'environment',class:'sr',id:'pcam',onchange:onFile});
   const gal=h('input',{type:'file',accept:'image/*',class:'sr',id:'pgal',onchange:onFile});
   function paintMedia(){
     if(cur.blob)media.replaceChildren(h('div',{class:'preview'},h('img',{src:URL.createObjectURL(cur.blob),alt:'Foto da tarefa'}),h('label',{for:'pgal',class:'btn small'},ic('image','s'),'Trocar')));
-    else media.replaceChildren(h('div',{class:'photo-zone'},ic('camera'),h('div',null,t.photo?'Mostre a tarefa feita numa foto.':'Foto opcional: ela fica no seu histórico.'),
-      h('div',{class:'row2'},h('label',{for:'pcam',class:'btn'},ic('camera','s'),'Tirar foto'),h('label',{for:'pgal',class:'btn ghost'},ic('image','s'),'Galeria'))));
+    else media.replaceChildren(h('div',{class:'photo-zone'},ic('camera'),h('div',null,'Foto opcional: vale +1 moeda e fica no seu histórico.'),
+      h('div',{class:'row2'},h('label',{for:'pcam',class:'btn ghost'},ic('camera','s'),'Tirar foto'),h('label',{for:'pgal',class:'btn ghost'},ic('image','s'),'Galeria'))));
   }
   function paintAi(msg,cls,icon){
     if(!sample||!sampleImages||!cur.blob){aiBox.replaceChildren();return}
     aiBox.replaceChildren(msg?h('div',{class:'ai '+(cls||''),role:'status'},icon?ic(icon,'s'):null,msg):h('button',{class:'btn soft small',style:'margin-top:10px',onclick:checkAi},ic('cam-ai','s'),'Conferir com IA (+1 se aprovada)'));
   }
   async function checkAi(){
+    if(!title()){toast('Diga primeiro o que você concluiu.');if(nameIn)nameIn.focus();return}
     aiBox.replaceChildren(h('div',{class:'ai',role:'status'},ic('cam-ai','s'),'Conferindo a foto…'));
     try{
-      const r=await sample.json(`Você confere, a partir de uma foto, se uma tarefa pessoal ou doméstica foi concluída. A tarefa é: "${t.title}". Olhe a imagem anexada e responda somente com JSON no formato {"ok": true ou false, "motivo": "uma frase curta e gentil em português do Brasil"}. Marque ok=true quando a foto mostrar de forma plausível a tarefa feita; seja justo, sem exigir perfeição.`,{images:[cur.blob],modelTier:'quick'});
+      const r=await sample.json(`Você confere, a partir de uma foto, se uma tarefa pessoal ou doméstica foi concluída. A tarefa é: "${title()}". Olhe a imagem anexada e responda somente com JSON no formato {"ok": true ou false, "motivo": "uma frase curta e gentil em português do Brasil"}. Marque ok=true quando a foto mostrar de forma plausível a tarefa feita; seja justo, sem exigir perfeição.`,{images:[cur.blob],modelTier:'quick'});
       cur.ai=!!(r&&r.ok);paintAi(r&&r.motivo?r.motivo:(cur.ai?'Tarefa confirmada.':'A foto não parece mostrar a tarefa.'),cur.ai?'ok':'no',cur.ai?'check':null);
     }catch(e){
       if(e&&e.code==='not_granted'){sample=null;paintAi();return}
       paintAi(e&&e.code==='rate_limited'?'Muitas conferências seguidas. Tente daqui a pouco.':'A conferência não funcionou agora. Você pode concluir mesmo assim.','no');
     }
   }
-  done.addEventListener('click',async()=>{done.disabled=true;done.textContent='Salvando…';closeSheet();await finish(t,cur)});
-  paintMedia();
+  done.addEventListener('click',async()=>{
+    if(adhoc&&!title()){nameIn.focus();toast('Diga o que você concluiu.');return}
+    const task=adhoc?{id:null,title:title(),coins:base()}:t;
+    done.disabled=true;done.textContent='Salvando…';closeSheet();await finish(task,cur,!!(dailySw&&dailySw.checked));
+  });
+  paintMedia();paintDone();
   const notes=[];if(s.boost)notes.push(h('span',{class:'boost-note'},ic('bolt','s'),`Turbo ${s.boost.mult}x ativo`));if(s.luck)notes.push(h('span',{class:'boost-note',style:'margin-left:10px'},ic('clover','s'),'Trevo ativo'));
-  openSheet(head(t.title,null,h('button',{class:'btn ghost small','aria-label':'Editar tarefa',onclick:()=>editTask(t)},ic('edit','s'),'Editar')),
-    h('div',{class:'reward',style:'font-size:18px;margin-top:4px'},`Vale +${t.coins}`,miniCoin()),notes.length?h('div',null,notes):null,
-    cam,gal,media,aiBox,h('div',{class:'sticky-cta'},done));
+  const top=adhoc?[head('Concluí outra coisa','Registre algo que você fez agora.'),
+      h('div',{class:'field'},h('label',{for:'an'},'O que você concluiu?'),nameIn),
+      h('div',{class:'field'},h('label',{for:'ac'},'Quantas moedas vale'),coinsIn,quickPick(coinsIn,[5,10,15,20,30]))]
+    :[head(t.title,null,h('button',{class:'btn ghost small','aria-label':'Editar tarefa',onclick:()=>editTask(t)},ic('edit','s'),'Editar')),
+      h('div',{class:'reward',style:'font-size:18px;margin-top:4px'},`Vale +${t.coins}`,miniCoin())];
+  openSheet(...top,notes.length?h('div',null,notes):null,cam,gal,media,aiBox,
+    dailySw?[h('label',{class:'switch-row',for:'cd',style:'margin-bottom:4px'},h('span',null,'Faço isso todo dia'),dailySw),h('p',{class:'hint'},'Ela fica fixa no topo da sua lista de tarefas.')]:null,
+    h('div',{class:'sticky-cta'},done));
+  if(adhoc)setTimeout(()=>nameIn.focus(),80);
 }
-async function finish(t,cur){
+async function finish(t,cur,makeDaily){
   const s=clone(M.state),now=Date.now(),today=dayKey(now),yest=dayKey(now-864e5);
   if(s.lastDay!==today)s.streak=s.lastDay===yest?(s.streak||0)+1:1;
   s.lastDay=today;
   let total=t.coins;const notes=[{k:'check',t:t.title,v:t.coins}],tags=[];
   if(s.boost&&s.boost.left>0){const extra=t.coins*(s.boost.mult-1);total+=extra;notes.push({k:'bolt',t:`Turbo ${s.boost.mult}x`,v:extra});s.boost.left--;if(!s.boost.left)s.boost=null}
+  if(cur.blob){total+=1;notes.push({k:'camera',t:'Foto de comprovação',v:1})}
   if(cur.ai===true){total+=1;notes.push({k:'cam-ai',t:'Foto aprovada pela IA',v:1})}
   if(s.streak>=3){total+=2;notes.push({k:'flame',t:`${s.streak} dias seguidos`,v:2})}
   let chance=.2;if(s.luck>0){chance=.5;s.luck--}
   const lucky=Math.random()<chance;
   if(lucky){const b=Math.ceil(t.coins*.5);total+=b;notes.push({k:'spark',t:'Bônus surpresa',v:b});tags.push(['Bônus surpresa!',''])}
-  if(tasksToday()+1>=(s.goal||3)&&s.goalDay!==today){
+  const goalHit=tasksToday()+1>=(s.goal||3)&&s.goalDay!==today;
+  if(goalHit){
     total+=5;notes.push({k:'target',t:'Meta diária batida',v:5});tags.push(['Meta do dia!','goal']);
     let gs=1;
     if(s.goalDay===yest)gs=(s.goalStreak||0)+1;
@@ -762,7 +848,14 @@ async function finish(t,cur){
     else{try{thumb=await shrink(cur.blob,200,true)}catch(e){}}
   }
   await putState(s);
-  const id=uid();await putDoc('log',id,{id,type:'task',taskId:t.id,title:t.title,coins:total,ts:now,photo,thumb,ai:cur.ai});
+  const taskId=t.id||(makeDaily?uid():null);
+  const id=uid();await putDoc('log',id,{id,type:'task',taskId,title:t.title,coins:total,ts:now,photo,thumb,ai:cur.ai});
+  if(makeDaily){
+    if(t.id&&M.tasks[t.id])await putDoc('tasks',t.id,Object.assign({},M.tasks[t.id],{daily:true}));
+    else if(!t.id)await putDoc('tasks',taskId,{id:taskId,title:t.title,coins:t.coins,daily:true,created:now});
+    toast(`“${t.title}” agora é uma tarefa de todo dia.`);
+  }
+  if(typeof onTaskDone==='function')onTaskDone({goal:goalHit});
 }
 function celebrate(total,notes,tags,lucky,levelUp){
   const p=$('#party');
@@ -784,6 +877,134 @@ function celebrate(total,notes,tags,lucky,levelUp){
 $('#party').addEventListener('click',e=>{if(e.target===e.currentTarget)e.currentTarget.classList.remove('on')});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#party').classList.remove('on')});
 
+/* ---------- Ranking entre amigos (Supabase) ---------- */
+const SB_URL='https://ktfqgzihgirtuqbhgjhk.supabase.co';
+const SB_KEY='sb_publishable_aHOXWGIxkOCImoCpmMmxgw_9uuyQp5c'; // chave pública: a proteção fica nas regras do banco
+const RKK='dopaminerun-rank';
+let RK={nickname:'',leagues:[],active:null,cache:{},queue:[]};
+try{RK=Object.assign(RK,JSON.parse(localStorage.getItem(RKK)||'{}'))}catch(e){}
+const saveRK=()=>{try{localStorage.setItem(RKK,JSON.stringify(RK))}catch(e){}};
+let sb=null,rkBusy=false,rkErr='',rkLoadedAt=0,pendingCode='',flushing=false;
+function sbClient(){if(!sb&&window.supabase&&window.supabase.createClient)sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'dopaminerun-auth'}});return sb}
+async function sbAuth(){
+  const c=sbClient();if(!c)throw{code:'lib'};
+  const g=await c.auth.getSession();if(g&&g.data&&g.data.session)return c;
+  const r=await c.auth.signInAnonymously();if(r.error)throw{code:'auth',message:r.error.message};return c;
+}
+async function rpc(name,args){const c=await sbAuth();const r=await c.rpc(name,args||{});if(r.error)throw{code:String(r.error.message||r.error.code||'erro'),raw:r.error};return r.data}
+const RKMSG={apelido_em_uso:'Esse apelido já está em uso nessa liga. Escolha outro.',apelido_invalido:'O apelido precisa ter de 2 a 20 caracteres.',
+  nome_invalido:'O nome da liga precisa ter de 2 a 30 caracteres.',liga_nao_encontrada:'Não achei nenhuma liga com esse código. Confira as letras.',
+  liga_cheia:'Essa liga já está cheia (50 pessoas).',limite_ligas:'Você já criou 5 ligas, que é o limite.',nao_membro:'Você não faz mais parte dessa liga.'};
+function rkMsg(e){
+  if(!navigator.onLine)return'Sem internet agora. O ranking atualiza quando a conexão voltar.';
+  const c=String(e&&e.code||'');for(const k in RKMSG)if(c.includes(k))return RKMSG[k];
+  if(c==='auth')return'Não consegui entrar no ranking. O login anônimo precisa estar ativado no Supabase.';
+  if(c==='lib')return'Não consegui carregar o ranking. Feche e abra o app com internet.';
+  return'O ranking está indisponível agora. Tente de novo em instantes.';
+}
+const isStandalone=()=>navigator.standalone===true||matchMedia('(display-mode: standalone)').matches;
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function installBanner(){
+  if(isStandalone()||!isIOS())return null;
+  try{if(localStorage.getItem('dopaminerun-install-hide'))return null}catch(e){}
+  const b=h('div',{class:'install',role:'note'},ic('share'),h('div',null,h('b',null,'Instale o app'),'Toque em Compartilhar e depois em "Adicionar à Tela de Início". Use sempre pelo ícone: é lá que seus dados ficam.'),
+    h('button',{class:'edit-link','aria-label':'Dispensar aviso',onclick:()=>{try{localStorage.setItem('dopaminerun-install-hide','1')}catch(e){}b.remove()}},'✕'));
+  return b;
+}
+function weekLabel(){const d=new Date();const day=(d.getDay()+6)%7;const a=new Date(d);a.setDate(d.getDate()-day);const b=new Date(a);b.setDate(a.getDate()+6);
+  const f=x=>x.toLocaleDateString('pt-BR',{day:'numeric',month:'short'}).replace('.','');return`Semana de ${f(a)} a ${f(b)} · zera na segunda`}
+async function refreshLeagues(){
+  const ls=await rpc('my_leagues');RK.leagues=(ls||[]).map(l=>({id:l.id,name:l.name,code:l.code,members:l.members,nickname:l.nickname}));
+  if(!RK.leagues.some(l=>l.id===RK.active))RK.active=RK.leagues.length?RK.leagues[0].id:null;
+  if(RK.leagues.length)RK.nickname=(RK.leagues.find(l=>l.id===RK.active)||RK.leagues[0]).nickname;
+  saveRK();
+}
+async function loadRanking(force){
+  if(!RK.leagues.length||rkBusy)return;if(!force&&Date.now()-rkLoadedAt<15000)return;
+  rkBusy=true;rkErr='';if(tab==='rank')render();
+  try{await flushRank(true);await refreshLeagues();if(RK.active){const rows=await rpc('get_ranking',{p_league:RK.active});RK.cache[RK.active]={rows:rows||[],at:Date.now()};saveRK()}rkLoadedAt=Date.now()}
+  catch(e){rkErr=rkMsg(e);if(String(e&&e.code).includes('nao_membro')){try{await refreshLeagues()}catch(_){}}}
+  rkBusy=false;if(tab==='rank')render();
+}
+function rankEnter(){if(RK.leagues.length)loadRanking(false)}
+function onTaskDone(o){
+  if(!RK.leagues.length)return;const day=dayKey(Date.now());
+  RK.queue.push({kind:'task',day,cid:'t'+uid()});if(o&&o.goal)RK.queue.push({kind:'goal',day,cid:'g'+uid()});
+  saveRK();flushRank();
+}
+async function flushRank(inner){
+  if(flushing||!RK.queue.length||!navigator.onLine||!RK.leagues.length)return;flushing=true;
+  try{
+    while(RK.queue.length){const ev=RK.queue[0];
+      try{await rpc('record_event',{p_kind:ev.kind,p_client_id:ev.cid,p_day:ev.day})}
+      catch(e){const c=String(e&&e.code);if(c.includes('dia_invalido')||c.includes('tipo_invalido')||c.includes('id_invalido')){RK.queue.shift();saveRK();continue}
+        if(c.includes('sem_liga')){RK.queue=[];saveRK();break}throw e}
+      RK.queue.shift();saveRK();
+    }
+    if(!inner){rkLoadedAt=0;if(tab==='rank')loadRanking(true)}
+  }catch(e){}finally{flushing=false}
+}
+window.addEventListener('online',()=>flushRank());
+async function rkRun(btn,fn){
+  const txt=btn.textContent;btn.disabled=true;btn.textContent='Aguarde…';
+  try{await fn()}catch(e){toast(rkMsg(e))}
+  btn.disabled=false;btn.textContent=txt;
+}
+function nickOk(v){v=v.trim().replace(/\s+/g,' ');if(v.length<2||v.length>20){toast(RKMSG.apelido_invalido);return null}return v}
+async function afterJoin(id,msg){
+  await refreshLeagues();RK.active=id||RK.active;saveRK();pendingCode='';
+  try{history.replaceState(null,'',location.pathname)}catch(e){}
+  rkLoadedAt=0;closeSheet();render();loadRanking(true);chime('level');toast(msg);
+}
+function joinForm(inSheet){
+  const nick=h('input',{type:'text',id:'rkn'+(inSheet?'s':''),maxlength:'20',autocomplete:'off',placeholder:'Como seus amigos te chamam',value:RK.nickname||''});
+  const code=h('input',{type:'text',id:'rkc'+(inSheet?'s':''),maxlength:'8',autocomplete:'off',autocapitalize:'characters',class:'upper',placeholder:'Ex.: K7M2QX',value:pendingCode||''});
+  const lname=h('input',{type:'text',id:'rkl'+(inSheet?'s':''),maxlength:'30',autocomplete:'off',placeholder:'Ex.: Liga dos amigos'});
+  const joinB=h('button',{class:'btn gold wide',onclick:()=>{const n=nickOk(nick.value);if(!n)return;const c=code.value.trim().toUpperCase();if(c.length<4){toast('Digite o código que você recebeu no convite.');code.focus();return}
+    rkRun(joinB,async()=>{const id=await rpc('join_league',{p_code:c,p_nickname:n});await afterJoin(id,'Você entrou na liga!')})}},'Entrar na liga');
+  const createB=h('button',{class:'btn wide',onclick:()=>{const n=nickOk(nick.value);if(!n)return;const l=lname.value.trim();if(l.length<2){toast(RKMSG.nome_invalido);lname.focus();return}
+    rkRun(createB,async()=>{const r=await rpc('create_league',{p_name:l,p_nickname:n});const row=Array.isArray(r)?r[0]:r;await afterJoin(row&&row.out_id,'Liga criada! Agora convide seus amigos.')})}},'Criar liga');
+  return[h('div',{class:'field'},h('label',{for:nick.id},'Seu apelido no ranking'),nick),
+    h('div',{class:'field'},h('label',{for:code.id},'Código de convite'),code),joinB,
+    h('div',{class:'rk-or'},'ou crie a sua'),
+    h('div',{class:'field'},h('label',{for:lname.id},'Nome da nova liga'),lname),createB];
+}
+function rulesCard(){return h('div',{class:'rk-card'},h('h3',null,'Como os pontos funcionam'),
+  h('ul',{class:'rk-rules'},h('li',null,'Tarefa concluída: 10 pontos (até 10 tarefas por dia)'),h('li',null,'Meta diária batida: 20 pontos'),h('li',null,'O ranking zera toda segunda-feira'),h('li',null,'Só o apelido e os pontos saem do seu celular')))}
+function invite(l){
+  const url=location.origin+location.pathname+'?liga='+l.code;
+  const text=`Entra na minha liga "${l.name}" no DopamineRun! 1) Abra o link no Safari 2) Compartilhar → Adicionar à Tela de Início 3) No app, vá em Ranking e use o código ${l.code}`;
+  if(navigator.share){navigator.share({title:'DopamineRun',text,url}).catch(()=>{});return}
+  const all=text+'\n'+url;(navigator.clipboard?navigator.clipboard.writeText(all):Promise.reject()).then(()=>toast('Convite copiado. Cole no WhatsApp.'),()=>toast(`Código da liga: ${l.code}`));
+}
+function viewRank(){
+  const frag=h('div',null,h('div',{class:'sec-head'},h('h2',null,'Ranking')));
+  if(!RK.leagues.length){
+    frag.append(h('p',{class:'sub'},'Dispute com amigos quem conclui mais tarefas na semana.'),h('div',{class:'rk-card'},joinForm(false)),rulesCard());
+    if(!isStandalone()&&isIOS())frag.append(h('p',{class:'rk-note'},ic('share','s'),'Instale o app antes de entrar numa liga: o ranking fica guardado no app da tela de início.'));
+    return frag;
+  }
+  const l=RK.leagues.find(x=>x.id===RK.active)||RK.leagues[0],c=RK.cache[l.id];
+  if(RK.leagues.length>1)frag.append(h('div',{class:'rk-chips'},RK.leagues.map(x=>h('button',{'aria-pressed':String(x.id===l.id),onclick:()=>{RK.active=x.id;saveRK();rkLoadedAt=0;render();loadRanking(true)}},x.name))));
+  frag.append(h('div',{class:'rk-head'},h('div',{class:'t'},l.name),h('div',{class:'m'},`${l.members} ${plural(l.members,'pessoa','pessoas')} · código `,h('b',{class:'upper'},l.code)),h('div',{class:'m'},weekLabel()),
+    h('div',{class:'row2'},h('button',{class:'btn gold',onclick:()=>invite(l)},ic('share','s'),'Convidar amigos'),h('button',{class:'btn','aria-label':'Atualizar ranking',onclick:()=>loadRanking(true)},ic('refresh','s'),rkBusy?'…':'Atualizar'))));
+  const list=h('div',{class:'list',style:'margin-top:12px'});
+  if(c&&c.rows&&c.rows.length){c.rows.forEach((r,i)=>list.append(h('div',{class:'rk-row'+(r.is_me?' me':'')},h('div',{class:'rk-pos'+(i<3&&r.points>0?' p'+(i+1):'')},i+1),
+    h('div',{class:'rk-name'},r.nickname+(r.is_me?' (você)':''),h('small',null,`${r.tasks} ${plural(r.tasks,'tarefa','tarefas')} · ${r.goals} ${plural(r.goals,'meta','metas')}`)),
+    h('div',{class:'rk-pts'},fmt(r.points),h('small',null,'pontos')))))}
+  else list.append(h('div',{class:'empty'},rkBusy?'Carregando o ranking…':'Ainda sem pontos nesta semana. Conclua uma tarefa para largar na frente.'));
+  frag.append(list);
+  if(RK.queue.length)frag.append(h('p',{class:'rk-note'},ic('clock','s'),`${RK.queue.length} ${plural(RK.queue.length,'pontuação aguardando','pontuações aguardando')} internet para enviar.`));
+  if(rkErr)frag.append(h('p',{class:'rk-note',style:'color:var(--rose)'},rkErr));
+  else if(c&&c.at)frag.append(h('p',{class:'rk-note'},`Atualizado às ${new Date(c.at).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}.`));
+  frag.append(rulesCard(),h('div',{class:'rk-danger'},
+    h('button',{class:'btn ghost',onclick:()=>openSheet(head('Entrar em outra liga','Use o código do convite ou crie uma nova.'),...joinForm(true))},'Outra liga'),
+    confirmBtn('Sair da liga','Sim, sair',async()=>{try{await rpc('leave_league',{p_league:l.id});delete RK.cache[l.id];await refreshLeagues();render();toast('Você saiu da liga.')}catch(e){toast(rkMsg(e))}})),
+    h('div',{class:'rk-danger',style:'margin-top:10px'},confirmBtn('Apagar meus dados do ranking','Sim, apagar tudo',async()=>{
+      try{await rpc('delete_my_data');try{await sbClient().auth.signOut()}catch(_){}RK={nickname:'',leagues:[],active:null,cache:{},queue:[]};saveRK();render();toast('Seus dados do ranking foram apagados.')}catch(e){toast(rkMsg(e))}})));
+  return frag;
+}
+
 /* ---------- Inicialização ---------- */
 (async()=>{
   try{
@@ -791,11 +1012,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#party').classLis
     const m=await IDB.get('kv','model');
     if(m){M=Object.assign(blank(),m);M.state=Object.assign(blankState(),m.state)}
   }catch(e){storageOk=false;console.warn(e)}
+  try{const q=new URLSearchParams(location.search).get('liga');if(q){pendingCode=q.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);if(!RK.leagues.length)tab='rank'}}catch(e){}
   shown=null;render();
+  if(RK.queue.length)flushRank();
   try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
   if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();flushRank()}});
 </script>
 </body>
 </html>
