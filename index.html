@@ -88,6 +88,7 @@ body.has-timer .wrap{padding-bottom:calc(var(--nav-h) + 110px)}
 .goal-txt{margin:0;font-size:15px;opacity:.95}
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .pill{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.14);border-radius:999px;padding:4px 11px 4px 8px;font-size:14px;font-weight:600}
+.pill.rank{border:0;background:var(--gold);color:#3A2600;font-weight:800;min-height:30px;cursor:pointer}
 .pill.buff{background:rgba(255,196,61,.22)}
 
 /* Sections */
@@ -274,8 +275,6 @@ nav button{font-size:12px}nav button .ic-wrap{width:50px}
 .divider{height:1px;background:var(--line);margin:20px 0 4px}
 
 /* v4.2: ajuste do fundo da tela (iOS 26) */
-nav{bottom:calc(-1 * var(--vp-gap,0px))}
-.timerbar{transform:translateY(var(--vp-gap,0px))}
 /* v4.2: HUD com apelido */
 .lvl.me{cursor:pointer;border-radius:16px}
 .lvl-text .nick-name{display:block;font-size:17px;font-weight:800;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -581,10 +580,11 @@ function startTimer(name,minutes){const now=Date.now(),cur=M.state.timer&&M.stat
 
 /* ---------- Nav & render ---------- */
 const TABS=[['tasks','list','Hoje'],['chests','chest','Baús'],['games','pad','Jogos'],['rank','trophy','Ranking'],['hist','history','Histórico']];
+function goTab(id){if(tab===id)return;tab=id;render();window.scrollTo({top:0});if(id==='rank')rankEnter()}
 function renderNav(){
   $('#navin').replaceChildren(...TABS.map(([id,icon,label])=>{
     const n=id==='chests'?M.state.chests.length:0;
-    return h('button',{'aria-current':tab===id?'page':false,'aria-label':label+(n?`, ${n} ${plural(n,'baú','baús')} para abrir`:''),onclick:()=>{if(tab!==id){tab=id;render();window.scrollTo({top:0});if(id==='rank')rankEnter()}}},
+    return h('button',{'aria-current':tab===id?'page':false,'aria-label':label+(n?`, ${n} ${plural(n,'baú','baús')} para abrir`:''),onclick:()=>goTab(id)},
       h('span',{class:'ic-wrap'},ic(icon)),label,n?h('i',{class:'badge','aria-hidden':'true'},n):null)}));
 }
 function render(){
@@ -605,6 +605,8 @@ function todayCard(){
   const date=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'});
   const segs=g<=10?h('div',{class:'segs'+(done?' done':''),'aria-hidden':'true'},Array.from({length:g},(_,i)=>h('i',{class:i<n?'on':''}))):h('div',{class:'segs'+(done?' done':''),'aria-hidden':'true'},h('i',{class:'on',style:`flex:${Math.min(n,g)}`}),n<g?h('i',{style:`flex:${g-n}`}):null);
   const pills=[h('span',{class:'pill'},ic('flame','s'),st?`${st} ${plural(st,'dia seguido','dias seguidos')}`:'Comece a sequência'),h('span',{class:'pill'},ic('target','s'),`${gs} ${plural(gs,'dia','dias')} de meta`)];
+  const rw=RK.joined&&RK.cache.week&&RK.cache.week.rows,rme=rw&&rw.find(r=>r.is_me);
+  if(rme)pills.push(h('button',{class:'pill rank',type:'button','aria-label':`${rme.pos}º lugar de ${rme.total} no ranking da semana. Abrir o ranking`,onclick:()=>goTab('rank')},ic('trophy','s'),`${rme.pos}º de ${fmt(rme.total)} na semana`));
   if(s.boost)pills.push(h('span',{class:'pill buff'},ic('bolt','s'),`Turbo ${s.boost.mult}x · ${s.boost.left}`));
   if(s.luck)pills.push(h('span',{class:'pill buff'},ic('clover','s'),`Trevo · ${s.luck}`));
   if(s.shields)pills.push(h('span',{class:'pill buff'},ic('shield','s'),`Escudo · ${s.shields}`));
@@ -974,13 +976,18 @@ function installBanner(){
   return b;
 }
 const PERIODS=[['week','Semana'],['month','Mês'],['all','Geral']];
-async function loadRanking(force){
-  if(!RK.joined||rkBusy)return;if(!force&&Date.now()-rkLoadedAt<15000)return;
-  rkBusy=true;rkErr='';if(tab==='rank')render();const per=RK.period;
-  try{await flushRank(true);const rows=await rpc('get_public_ranking',{p_period:per,p_limit:50});RK.cache[per]={rows:rows||[],at:Date.now()};saveRK();rkLoadedAt=Date.now()}
-  catch(e){rkErr=rkMsg(e);if(String(e&&e.code).includes('sem_liga')){RK.joined=false;saveRK()}}
-  rkBusy=false;if(tab==='rank')render();
+const rkAt={};
+async function loadRanking(force,period){
+  const per=period||RK.period;
+  if(!RK.joined||rkBusy||!navigator.onLine&&!force)return;if(!force&&Date.now()-(rkAt[per]||0)<15000)return;
+  const quiet=tab!=='rank';rkBusy=true;if(!quiet){rkErr='';render()}
+  try{await flushRank(true);const rows=await rpc('get_public_ranking',{p_period:per,p_limit:50});RK.cache[per]={rows:rows||[],at:Date.now()};saveRK();rkAt[per]=Date.now()}
+  catch(e){if(!quiet)rkErr=rkMsg(e);if(String(e&&e.code).includes('sem_liga')){RK.joined=false;saveRK()}}
+  rkBusy=false;if(tab==='rank'||tab==='tasks')render();
+  if(tab==='rank'&&per!==RK.period&&!RK.cache[RK.period])loadRanking(false);
 }
+/* posição da semana na tela inicial */
+function refreshHomeRank(force){if(RK.joined&&navigator.onLine)loadRanking(!!force,'week')}
 function rankEnter(){if(RK.joined)loadRanking(false)}
 function onTaskDone(o){
   if(!RK.joined)return;const day=dayKey(Date.now());
@@ -996,7 +1003,7 @@ async function flushRank(inner){
         if(c.includes('sem_liga')){RK.queue=[];RK.joined=false;saveRK();break}throw e}
       RK.queue.shift();saveRK();
     }
-    if(!inner){rkLoadedAt=0;if(tab==='rank')loadRanking(true)}
+    if(!inner){if(tab==='rank')loadRanking(true);else refreshHomeRank(true)}
   }catch(e){}finally{flushing=false}
 }
 window.addEventListener('online',()=>flushRank());
@@ -1018,7 +1025,7 @@ function ordinal(n){return h('span',{class:'num'},String(n)+'º')}
 function joinSheet(){
   const inp=h('input',{type:'text',id:'rkn',maxlength:'20',autocomplete:'nickname',value:RK.nickname||'',placeholder:'Como você quer aparecer'});
   const go=h('button',{class:'btn gold wide',onclick:()=>{const n=nickOk(inp.value);if(!n)return;
-    rkRun(go,async()=>{const v=await rpc('join_ranking',{p_nickname:n});RK.nickname=typeof v==='string'?v:n;RK.joined=true;rkLoadedAt=0;saveRK();closeSheet();render();loadRanking(true);chime('level');toast('Você entrou no ranking!')})}},'Entrar no ranking');
+    rkRun(go,async()=>{const v=await rpc('join_ranking',{p_nickname:n});RK.nickname=typeof v==='string'?v:n;RK.joined=true;saveRK();closeSheet();render();loadRanking(true);chime('level');toast('Você entrou no ranking!')})}},'Entrar no ranking');
   inp.addEventListener('keydown',e=>{if(e.key==='Enter')go.click()});
   openSheet(head('Entrar no ranking','Confirme como você quer aparecer.'),
     h('div',{class:'field'},h('label',{for:'rkn'},'Apelido'),inp,h('span',{class:'sub',style:'margin:2px 0 0'},'De 2 a 20 caracteres. Precisa ser único entre todos os jogadores.')),
@@ -1071,7 +1078,7 @@ function viewRank(){
   const per=RK.period,c=RK.cache[per],rows=(c&&c.rows)||[],me=rows.find(r=>r.is_me);
   frag.append(h('div',{class:'rk-title'},h('div',null,h('h2',null,'Ranking'),h('small',null,rows.length?`${fmt(rows[0].total)} ${plural(rows[0].total,'jogador','jogadores')}`:'Todos os jogadores')),
     h('button',{class:'icon-btn','aria-label':'Opções do ranking',onclick:manageSheet},ic('dots'))));
-  frag.append(h('div',{class:'seg',role:'tablist','aria-label':'Período'},PERIODS.map(([k,label])=>h('button',{role:'tab','aria-selected':String(k===per),onclick:()=>{if(RK.period===k)return;RK.period=k;saveRK();rkLoadedAt=0;render();loadRanking(true)}},label))));
+  frag.append(h('div',{class:'seg',role:'tablist','aria-label':'Período'},PERIODS.map(([k,label])=>h('button',{role:'tab','aria-selected':String(k===per),onclick:()=>{if(RK.period===k)return;RK.period=k;saveRK();render();loadRanking(true)}},label))));
   const hero=h('div',{class:'rk-hero',style:'margin-top:12px'});
   if(me){
     hero.append(h('div',{class:'rk-status'},h('div',{class:'rk-place'},ordinal(me.pos),h('small',null,`lugar de ${fmt(me.total)}`)),
@@ -1111,24 +1118,34 @@ function openProfile(){
 }
 /* ---------- iOS 26: ajuste manual do fundo da tela (diagnóstico do bug WebKit 301108) ---------- */
 const VPK='dopaminerun-vp-gap';
-function vpGap(){try{return Math.max(0,Math.min(90,parseInt(localStorage.getItem(VPK)||'0',10)||0))}catch(e){return 0}}
-function applyVp(v){document.documentElement.style.setProperty('--vp-gap',(v||0)+'px')}
+/* Bug do iOS 26 no app instalado: a área útil (innerHeight) fica menor que a tela pela altura da barra de status,
+   e tudo que é "fixo embaixo" para antes do fim. Medido no iPhone do Thiago (393×852): tela − janela = 108 = 2 × 54
+   (barra de status), faixa vazia = 54. Sem o bug, tela − janela = barra de status (≤ 62). */
+function vpAuto(){try{if(!(isIOS()&&isStandalone())||innerWidth>innerHeight)return 0;const d=screen.height-innerHeight;return d>70&&d<150?Math.round(d/2):0}catch(e){return 0}}
+function vpUser(){try{const v=localStorage.getItem(VPK);return v===null?null:Math.max(0,Math.min(90,parseInt(v,10)||0))}catch(e){return null}}
+function vpGap(){const u=vpUser();return u===null?vpAuto():u}
+function applyVp(v){v=Math.round(v||0);let st=document.getElementById('vpstyle');if(!st){st=document.createElement('style');st.id='vpstyle';document.head.append(st)}
+  st.textContent=v?`nav{bottom:-${v}px}.timerbar{transform:translateY(${v}px)}.toast{margin-bottom:-${v}px}dialog{margin-bottom:-${v}px}dialog::backdrop,.party,.nick{bottom:-${v}px}`:'';
+  document.documentElement.dataset.vpGap=v}
+window.addEventListener('resize',()=>applyVp(vpGap()));window.addEventListener('orientationchange',()=>setTimeout(()=>applyVp(vpGap()),300));
 function vpMeasure(){
   const pr=h('div',{style:'position:fixed;left:0;top:0;width:1px;visibility:hidden;pointer-events:none;height:100lvh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:content-box'});
   document.body.append(pr);const cs=getComputedStyle(pr),lvh=pr.getBoundingClientRect().height-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
   pr.style.height='100svh';const svh=pr.getBoundingClientRect().height-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
   const top=parseFloat(cs.paddingTop),bot=parseFloat(cs.paddingBottom);pr.remove();
   const vv=window.visualViewport?Math.round(visualViewport.height):0;
-  return`tela ${screen.width}×${screen.height} · janela ${innerWidth}×${innerHeight} · vv ${vv} · lvh ${Math.round(lvh)} · svh ${Math.round(svh)} · seguras ${Math.round(top)}/${Math.round(bot)} · app ${isStandalone()?'instalado':'navegador'} · ajuste ${vpGap()}`;
+  return`tela ${screen.width}×${screen.height} · janela ${innerWidth}×${innerHeight} · vv ${vv} · lvh ${Math.round(lvh)} · svh ${Math.round(svh)} · seguras ${Math.round(top)}/${Math.round(bot)} · app ${isStandalone()?'instalado':'navegador'} · ajuste ${vpGap()}${vpUser()===null?' auto':' manual'}`;
 }
 function vpSettings(){
   if(!(isIOS()&&isStandalone())&&!/[?&]diag=1/.test(location.search))return null;
   const r=h('input',{type:'range',min:'0',max:'90',step:'1',value:String(vpGap()),'aria-label':'Ajuste da barra de navegação'});
-  const out=h('output',null,vpGap()+' px'),diag=h('div',{class:'vp-diag'},vpMeasure());
-  r.addEventListener('input',()=>{const v=parseInt(r.value,10)||0;out.textContent=v+' px';applyVp(v);try{localStorage.setItem(VPK,String(v))}catch(e){}diag.textContent=vpMeasure()});
+  const lab=()=>vpUser()===null?`Automático (${vpAuto()} px)`:`${vpGap()} px`;
+  const out=h('output',null,lab()),diag=h('div',{class:'vp-diag'},vpMeasure());
+  const auto=h('button',{class:'linkbtn',type:'button',onclick:()=>{try{localStorage.removeItem(VPK)}catch(e){}applyVp(vpGap());r.value=String(vpGap());out.textContent=lab();diag.textContent=vpMeasure()}},'Voltar ao automático');
+  r.addEventListener('input',()=>{const v=parseInt(r.value,10)||0;try{localStorage.setItem(VPK,String(v))}catch(e){}applyVp(v);out.textContent=lab();diag.textContent=vpMeasure()});
   return[h('div',{class:'divider'}),h('div',{class:'field'},h('label',null,'Encaixe da barra de navegação'),
-    h('span',{class:'sub',style:'margin:0'},'Se sobrar um espaço embaixo dos ícones, arraste até a barra encostar no fim da tela.'),
-    h('div',{class:'vp-row'},r,out),diag)];
+    h('span',{class:'sub',style:'margin:0'},'O app ajusta sozinho. Se ainda sobrar espaço embaixo dos ícones, arraste até a barra encostar no fim da tela.'),
+    h('div',{class:'vp-row'},r,out),auto,diag)];
 }
 applyVp(vpGap());
 
@@ -1161,11 +1178,11 @@ function askNick(){
   }catch(e){storageOk=false;console.warn(e)}
   shown=null;render();
   if(needNick())askNick();
-  if(RK.queue.length)flushRank();
+  if(RK.queue.length)flushRank();else refreshHomeRank(false);
   try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
   if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
-document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();flushRank()}});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();if(RK.queue.length)flushRank();else refreshHomeRank(false)}});
 </script>
 </body>
 </html>
